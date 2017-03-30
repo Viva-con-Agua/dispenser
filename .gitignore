@@ -1,4 +1,4 @@
-# Ignore Play! working directory #
+#Ignore Play! working directory #
 bin/
 /db
 .eclipse
