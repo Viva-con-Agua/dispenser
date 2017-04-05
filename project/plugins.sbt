@@ -23,12 +23,7 @@ addSbtPlugin("org.irundaia.sbt" % "sbt-sassify" % "1.4.6")
 addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % "1.4.1")
 
 //mustache
+resolvers += Resolver.url("julienba.github.com", url("http://julienba.github.com/repo/"))(Resolver.ivyStylePatterns)
+addSbtPlugin("org.jba" % "play2-plugins-mustache" % "1.1.3") // play 2.2
 
-resolvers += Resolver.url(
-  "bintray-sbt-plugin-michaelallen",
-  url("https://dl.bintray.com/michaelallen/sbt-plugins/")
-)(Resolver.ivyStylePatterns)
-
-resolvers += "bintray-maven-michaelallen" at "https://dl.bintray.com/michaelallen/maven/"
-
-addSbtPlugin("io.michaelallen.mustache" %% "sbt-mustache" % "0.2")
+//addSbtPlugin("io.michaelallen.mustache" %% "sbt-mustache" % "0.2")

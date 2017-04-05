@@ -1,3 +1,4 @@
+
 name := """dispenser"""
 
 version := "0.0.1"
@@ -10,28 +11,25 @@ libraryDependencies ++= Seq(
   jdbc,
   cache,
   ws,
-  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
+  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
+  "com.nulab-inc" %% "play2-oauth2-provider" % "1.2.0",
+  "org.reactivemongo" %% "reactivemongo" % "0.12.1"
 )
-
-//Plugins for docker
-addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % "1.4.1")
-
-//mustache plugin
-resolvers += Resolver.url(
-  "bintray-sbt-plugin-michaelallen",
-  url("https://dl.bintray.com/michaelallen/sbt-plugins/")
-)(Resolver.ivyStylePatterns)
-
-resolvers += "bintray-maven-michaelallen" at "https://dl.bintray.com/michaelallen/maven/"
-
-addSbtPlugin("io.michaelallen.mustache" %% "sbt-mustache" % "0.2")
+//add mongoDB driver
+libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.0.0"
 
 enablePlugins(sbtdocker.DockerPlugin)
-
+enablePlugins(play.sbt.PlayScala)
 //create docker and setup dockerfile
 dockerfile in docker := new Dockerfile {
   from("alpine")
 }
+//scalaWs
+libraryDependencies ++= Seq(
+  ws
+)
 name := "dispenser"
 version := "0.0.1"
 imageNames in docker := Seq(ImageName(s"${name.value}:${version.value}"))
+
+
