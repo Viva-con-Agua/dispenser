@@ -15,7 +15,13 @@ import scala.concurrent.ExecutionContext.Implicits._
 import scala.concurrent.forkjoin._
 // the following is equivalent to `implicit val ec = ExecutionContext.global`
 
-class Scheduler @Inject() (val system: ActorSystem, @Named("scheduler-actor") val schedulerActor: ActorRef) (implicit ec: ExecutionContext) {
-  system.scheduler.schedule(0.microseconds, 5.seconds, schedulerActor, "update")
+class Scheduler @Inject() (
+  val system: ActorSystem, 
+  @Named("scheduler-actor") val schedulerActor: ActorRef,
+  @Named("micro-actor") val microActor: ActorRef
+
+) (implicit ec: ExecutionContext) {
+  system.scheduler.schedule(5.seconds, 60.seconds, schedulerActor, "update")
+  system.scheduler.schedule(7.seconds, 30.seconds, microActor, "getMicro") 
 }
 

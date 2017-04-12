@@ -7,16 +7,20 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.11.7"
 
+routesGenerator := InjectedRoutesGenerator
+
 libraryDependencies ++= Seq(
   jdbc,
   cache,
   ws,
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
   "com.nulab-inc" %% "play2-oauth2-provider" % "1.2.0",
-  "org.reactivemongo" %% "reactivemongo" % "0.12.1"
+//  "org.reactivemongo" %% "reactivemongo" % "0.12.1",
+  "org.reactivemongo" %% "reactivemongo-play-json" % "0.12.1",
+  "org.reactivemongo" %% "play2-reactivemongo" % "0.11.14"
 )
 //add mongoDB driver
-libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.0.0"
+//libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.0.0"
 
 enablePlugins(sbtdocker.DockerPlugin)
 enablePlugins(play.sbt.PlayScala)

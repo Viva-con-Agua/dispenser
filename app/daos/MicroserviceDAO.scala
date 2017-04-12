@@ -1,35 +1,57 @@
-package models.daos
+package daos
 
-import javax.inject.Inject
+
+import java.util.UUID
+
+import javax.inject._
 import play.api.libs.json._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{Await, Future} 
 import scala.concurrent.duration._
-import reactivemongo.api._
 
+import play.api.Play.current
+
+
+import play.modules.reactivemongo.{ // ReactiveMongo Play2 plugin
+  MongoController,
+  ReactiveMongoApi,
+  ReactiveMongoComponents
+}
+
+import play.modules.reactivemongo.ReactiveMongoApi
 import play.modules.reactivemongo.json._
-import play.modules.reactivemongo.json.collection._
+import play.modules.reactivemongo.json.collection.JSONCollection
 
-class MicroserviceDAO @Inject() (db: DB) {
-  def microservices: JSONCollection = db.collection[JSONCollection]("microservices")
+import models.{Micro, ObjectIdWrapper}
+import com.google.inject.ImplementedBy
+
+
+@ImplementedBy(classOf[MongoMiSeDAO])
+trait MicroserviceDAO extends ObjectIdResolver  {
+  def find(id: UUID):Future[Option[Micro]]
+  def find(name: String):Future[Option[Micro]]
+  //def find()
+  def save(micserv: Micro):Future[Micro]
+}
+
+
+
+class MongoMiSeDAO @Inject() (val reactiveMongoApi: ReactiveMongoApi) extends MicroserviceDAO with MongoController with ReactiveMongoComponents {
+  val microservices = reactiveMongoApi.db.collection[JSONCollection]("microservices")
   
-  //insert Microservice Data into microservices Collection
-  def insert(ms: MicroserviceData) : Future[Option[Microservice]] = {
-    //check that MS is not in Collection
-    this.find(ms).flatmap(_ match {
-      //if MS is in Collection return MS
-      case Some(ms) => Future.successful(Some(ms))
-      //else MS Not in Collection insert
-      case None => {
-        microservices.insert(Microservice(id, ms)).flatMap( _.ok match {
-          case true => this.find(ms)
-          case false => Future(None)
-        })
-      }
-    })
-  }  
-  //find MS via MicroserviceData in the Collection microservices
-  def find(ms: MicroserviceData) : Future[Option[Microservice]] = {
-    microservices.find(this.getQuery(Json.toJson(ms))).one[Microservice]  
-  }
+  override def getObjectId(id: UUID):Future[Option[ObjectIdWrapper]] = 
+    microservices.find(Json.obj("id" -> id), Json.obj("_id" -> 1)).one[ObjectIdWrapper]
+
+  override def getObjectId(name: String):Future[Option[ObjectIdWrapper]] =
+    microservices.find(Json.obj("id" -> UUID.fromString(name)), Json.obj("_id" -> 1)).one[ObjectIdWrapper]
+
+  def find(id: UUID):Future[Option[Micro]] = 
+    microservices.find(Json.obj("id" -> id)).one[Micro]
+
+  def find(name: String):Future[Option[Micro]] = 
+    microservices.find(Json.obj("name" -> name)).one[Micro]
+
+  def save(micro: Micro):Future[Micro] = 
+    microservices.insert(micro).map(_ => micro)
+
 }
