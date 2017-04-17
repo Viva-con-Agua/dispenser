@@ -19,6 +19,9 @@ addSbtPlugin("org.irundaia.sbt" % "sbt-sassify" % "1.4.6")
 
 addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "5.1.0")
 
+addSbtPlugin("com.github.ddispaltro" % "sbt-reactjs" % "0.5.2")
+
+
 //docker plugin
 	
 

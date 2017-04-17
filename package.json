@@ -1,0 +1,19 @@
+{
+  "name": "testjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+		"build": "$(npm bin)/browserify --debug app/views/admin/admin-workspace.jsx -t babelify -o public/javascripts/admin-workspace.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-react": "^6.24.1",
+    "babelify": "^7.3.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {},
+  "description": ""
+}
