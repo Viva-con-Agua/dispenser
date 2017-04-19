@@ -17,8 +17,8 @@ libraryDependencies ++= Seq(
   "com.nulab-inc" %% "play2-oauth2-provider" % "1.2.0",
 //  "org.reactivemongo" %% "reactivemongo" % "0.12.1",
   "org.reactivemongo" %% "reactivemongo-play-json" % "0.11.14",
-  "org.reactivemongo" %% "play2-reactivemongo" % "0.11.14"
-  "org.webjars" %% "webjars-play" % "2.4.0-1"
+  "org.reactivemongo" %% "play2-reactivemongo" % "0.11.14",
+  "org.webjars" %% "webjars-play" % "2.4.0-1",
   "org.webjars" % "react" % "0.13.3"
 )
 //add mongoDB driver

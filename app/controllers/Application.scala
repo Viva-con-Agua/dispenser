@@ -1,3 +1,8 @@
+package controllers
+
+import play.api._
+import play.api.mvc._
+
 import play.api.i18n.{MessagesApi, Messages, I18nSupport}
 import play.api.i18n.Messages.Implicits._
 
@@ -9,14 +14,20 @@ import scala.collection.JavaConversions._
 import scala.concurrent.Future
 import com.typesafe.config.ConfigFactory
 
+import play.api.mvc.Action
+import play.api.mvc.Results._
+import javax.inject._
+import com.typesafe.config.ConfigFactory
 
 
 class Application @Inject() (
-  val messageApi: MessageApi
-  ) extends I18nSupport {
+  val messageApi: MessagesApi
+  ) {
   
-  def index = SecuredAction.async { implicit request =>
-    Future.successful(Redirect(routes.Projects.index()))
+  val conf = ConfigFactory.load()
+  
+  def index = Action.async { implicit request =>
+    Future.successful(Redirect(routes.Admin.index()))
   }
 
   def javascriptRoutes = Action { implicit request =>
