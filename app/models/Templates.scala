@@ -1,8 +1,8 @@
 package models
 
-import play.api.libs.json.Json
+import play.api.libs.json.{JsPath, Json, OWrites, Reads}
 import java.util.{Date, UUID}
-
+import play.api.libs.functional.syntax._
 /*
  * Models to handle templates. Dispenser Need a Json in Format: 
  *  
@@ -30,50 +30,89 @@ import java.util.{Date, UUID}
  *
  */
 
-
-
 trait MetaDataBase {
   val microServiceName: String
-  val templateName : String
-  val searchEngineKeywords: List[String]
-  val language: List[String]
-  val organization: String
-}
-
-case class MetaDataStub(
-  microServiceName: String,
-  templateName: String,
-  organization: String
-) extends MetaDataBase {
-  val language: Option[List[String]]
+  val template: String
   val searchEngineKeywords: Option[List[String]]
+  val language: Option[List[String]]
+  val organization: Option[String]
+
 }
 
-object MetaDataStub {
-  implicit val metaDataStubJsonFormat = Json.format[MetaDataStub]
+
+case class MetaData(
+  microServiceName: String,
+  template: String,
+  searchEngineKeywords: Option[List[String]],
+  language: Option[List[String]],
+  organization: Option[String]
+)extends MetaDataBase
+
+object MetaData {
+
+  def apply(tuple: (String, String, Option[List[String]], Option[List[String]], Option[String])):MetaData =
+    MetaData(tuple._1, tuple._2, tuple._3, tuple._4, tuple._5)
+
+  implicit val metaDataWrites: OWrites[MetaData] = (
+    (JsPath \ "microServiceName").write[String] and
+    (JsPath \ "templates").write[String] and
+    (JsPath \ "searchEngineKeywords").writeNullable[List[String]] and
+    (JsPath \ "language").writeNullable[List[String]] and
+    (JsPath \ "organization").writeNullable[String]
+  )(unlift(MetaData.unapply))
+
+  implicit val metaDataReads: Reads[MetaData] = (
+    (JsPath \ "microServiceName").read[String] and
+    (JsPath \ "template").read[String] and
+    (JsPath \ "searchEngineKeywords").readNullable[List[String]] and
+    (JsPath \ "language").readNullable[List[String]] and
+    (JsPath \ "organization").readNullable[String]
+  ).tupled.map(MetaData( _ ))
 }
 
-trait TemplateDataBase {
-  val title: String
+
+case class TemplateData(
+  title: String,
+  body: String
+)
+
+object TemplateData {
+
+  def apply(tuple: (String, String)) : TemplateData =
+    TemplateData(tuple._1, tuple._2)
+
+  implicit val templateDataWrites: OWrites[TemplateData] = (
+    (JsPath \ "title").write[String] and
+    (JsPath \ "body").write[String]
+  )(unlift(TemplateData.unapply))
+
+  implicit val templateDataReads:  Reads[TemplateData] = (
+    (JsPath \ "title").read[String] and
+    (JsPath \ "body").read[String]
+  ).tupled.map(TemplateData( _ ))
 }
 
-case class TemplateDataStub(
-  title: String
-) extends TemplateDataBase{}
-
-
-
-object TemplateDataStub {
-  implicit val templateDataJsonFormat = Json.format[TemplateDataStub]
-}
-
-trait TemplateBase {
-  val metaData: MetaDataStub
-  val templateData : TemplateDataStub
-}
 
 case class Template(
-  metaData: MetaDataStub,
-  templateData: TemplateDataStub
-  )extends TemplateBase {}
+  metaData: MetaData,
+  templateData: TemplateData
+  )
+
+object Template{
+  
+  def apply(tuple: (MetaData, TemplateData)) : Template = 
+    Template(tuple._1, tuple._2)
+
+  implicit val templateWrites: OWrites[Template] = (
+    (JsPath \ "metaData").write[MetaData] and
+    (JsPath \ "templateData").write[TemplateData]
+  )(unlift(Template.unapply))
+  
+  implicit val templateReads: Reads[Template] = (
+    (JsPath \ "metaData").read[MetaData] and
+    (JsPath \ "templateData").read[TemplateData]
+  ).tupled.map(Template( _ ))
+
+}
+
 
