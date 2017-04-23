@@ -21,21 +21,14 @@ class Templates @Inject() (
 
   def validateJson[A: Reads] = BodyParsers.parse.json.validate(_.validate[A].asEither.left.map(e => BadRequest(JsError.toJson(e))))
   
-  def testDummy = Action(parse.json) { request =>
+  def getTemplate = Action(validateJson[Template]) { request =>
+    val template = request.body
+    val templateName = template.metaData.template 
     
-    val template: JsResult[Template] = request.body.validate[Template] 
-    template match {
-      case s: JsSuccess[Template] =>
-        val metaData: MetaData = MetaData(
-          s.get.metaData.microServiceName, 
-          s.get.metaData.template,
-          s.get.metaData.searchEngineKeywords,
-          s.get.metaData.language,
-          s.get.metaData.organization
-          )
-        Ok(scalate.render("testDummy.mustache", Map("name" -> metaData.microServiceName)))
-      case e: JsError => BadRequest("Detect error:" + JsError.toJson(e))
-    }
-    
+    //templateName match {
+      //case "simpleTemplate" => 
+        
+    Ok(scalate.render(templateName +".mustache" , template.toTemplateString))
+    //}
   }
 }

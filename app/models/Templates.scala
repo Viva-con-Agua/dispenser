@@ -96,7 +96,13 @@ object TemplateData {
 case class Template(
   metaData: MetaData,
   templateData: TemplateData
-  )
+  ) {
+    def toTemplateString: Map[String, String] = Map(
+    "microServiceName" -> this.metaData.microServiceName
+    ,"title" ->  this.templateData.title
+    ,"body" -> this.templateData.body
+    )
+}
 
 object Template{
   
