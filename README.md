@@ -8,6 +8,31 @@ INSTALL
 Dispenser can be build via sbt-buildtool.
 
 
+
+TEMPLATE
+========
+
+Dispenser can render HTML-Files with custom Context. For this you can simply send an Json in Format:
+```json
+{
+	metaData: {
+		microServiceName: "",
+		template: "",
+		searchEngineKeywords: "",
+		language: "",
+		organization: ""
+	},
+	templateData: {
+		title: "",
+		body: ""
+	}
+}
+```
+
+
+to Dispenser @ URL/getTemplate.  
+
+
 ChangeLog
 =========
 
