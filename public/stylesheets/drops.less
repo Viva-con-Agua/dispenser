@@ -1,0 +1,210 @@
+@standart-font-size: 1.5em;
+@standart-font-color: black;
+@standart-width-of-komponents: 90%;
+@margin-left-rigth-for-standart-width: (100% - @standart-width-of-komponents) / 2;
+@standart-margin-at-bottom: 1.25em;
+@image-height-width: 12.5em;
+
+/*
+** #BODY
+*/
+
+body {
+  font-family: "comic sans ms", sanf-serif;
+  font-size: 1em;
+  color: @standart-font-color;
+}
+
+/*
+** #SECTION
+*/
+
+div.section {
+  font-size: 4em;
+  text-align: left;
+  width: 80%;
+  padding: 0px;
+  margin-left: 5%;
+  margin-bottom: @standart-margin-at-bottom;
+  position: relative;
+}
+img.top-right {
+  width: 10%;
+  display: block;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+/*
+** #SEARCH
+*/
+
+div.search {
+  position: relative;
+  width: @standart-width-of-komponents;
+  height: 2em;
+  margin-right: @margin-left-rigth-for-standart-width;
+  margin-left: @margin-left-rigth-for-standart-width;
+  margin-bottom: @standart-margin-at-bottom;
+  border: 0.125em solid black;
+  border-radius: 0.625em;
+}
+input.search {
+  width: 80%;
+  position: absolute;
+  top: 0.125em;
+  left: 3.125em;
+  border: 0px;
+  font-size: @standart-font-size;
+  margin: 0px;
+  padding: 0px;
+}
+input.search:focus {
+  border-color: white;
+}
+img.search {
+  height: 1.875em;
+  position: absolute;
+  top: 0.0625em;
+  left: 0.1875em;
+  margin: 0;
+}
+input.found {
+  width: @standart-width-of-komponents;
+  height: 2em;
+  border: 0.125em solid black;
+  margin-left: @margin-left-rigth-for-standart-width;
+  margin-right: @margin-left-rigth-for-standart-width;
+  margin-bottom: @standart-margin-at-bottom;
+  text-align: left;
+  font-size: @standart-font-size;
+  padding: 0px 0px 0px 0.3125em;
+}
+
+/*
+** #LIST-OF-USERS
+*/
+
+div.list-of-users {
+  position: relative;
+  width: @standart-width-of-komponents;
+  height: @image-height-width;
+  margin-right: @margin-left-rigth-for-standart-width;
+  margin-left: @margin-left-rigth-for-standart-width;
+  margin-bottom: @standart-margin-at-bottom/10;
+  border: 0.0625em solid black;
+}
+img.list-of-users {
+  height: @image-height-width;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  margin: 0;
+}
+div.user-info-in-list {
+  height: @image-height-width;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: @image-height-width;
+  margin: 0;
+  border-left: 0.0625em solid black;
+}
+h1.user-name-1 {
+  font-size: @standart-font-size;
+  margin-left: 5%;
+  margin-top: 1.25em;
+  margin-bottom: @standart-margin-at-bottom;
+  text-align: left;
+}
+p.user-position-1 {
+  font-size: 1em;
+  color: grey;
+  margin-left: 5%;
+  margin-bottom: @standart-margin-at-bottom;
+  text-align: left;
+}
+
+/*
+** #OPTIONS-AT-BOTTOM
+*/
+
+div.options-at-bottom {
+  width: @standart-width-of-komponents;
+  position: absolute;
+  top: 100%;
+  margin-right: @margin-left-rigth-for-standart-width;
+  margin-left: @margin-left-rigth-for-standart-width;
+  margin-bottom: @standart-margin-at-bottom;
+  padding: 0;
+  border: 0px;
+  font-size: @standart-font-size;
+}
+a.delete-button {
+  position: absolute;
+  width: 100%;
+  border: 0.0625em solid black;
+  margin-bottom: 0.625em;
+  background-color: red;
+  font-weight: normal;
+  text-align: center;
+  color: white;
+  box-shadow: 0.1875em 0.1875em black;
+  display: inline-block;
+}
+a.delete-button:hoover {
+  border: 0.0625em solid black;
+  background-color: red;
+  font-weight: normal;
+  color: white;
+  box-shadow: 0.1875em 0.1875em black;
+}
+a.statement-button {
+  position: absolute;
+  width: 100%;
+  border: 0.0625em solid black;
+  background-color: white;
+  font-weight: normal;
+  color: black;
+  text-align: center;
+  box-shadow: 0.1875em 0.1875em black;
+  display: inline-block;
+}
+
+/*
+** #EDIT-REGION
+*/
+
+input.city {
+  width: @standart-width-of-komponents;
+  height: 1.75em;
+  margin-left: @margin-left-rigth-for-standart-width;
+  margin-right: @margin-left-rigth-for-standart-width;
+  margin-bottom: @standart-margin-at-bottom;
+  text-align: left;
+  font-size: @standart-font-size;
+}
+input.city:valid {
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 0.1875em solid black;
+}
+select.region {
+  width: @standart-width-of-komponents;
+  font-size: @standart-font-size;
+  border: 0.1875em solid black;
+  margin-left: @margin-left-rigth-for-standart-width;
+  margin-right: @margin-left-rigth-for-standart-width;
+  margin-bottom: @standart-margin-at-bottom;
+}
+a.add-region {
+  font-size: @standart-font-size;
+  width: 20%;
+  color: blue;
+  border-bottom: 2px solid blue;
+  margin-left: 40%;
+  margin-right: 40%;
+  margin-bottom: @standart-margin-at-bottom;
+}
