@@ -4,46 +4,48 @@
 <link rel="stylesheet" type="text/css" href="drops.css">
 </head>
 <body>
+<div class="wrapper">
+	<div class="content">
+		<div class="section">Add tech client</div>
+		<a class="top-right" href="testGlobalMenu.html">
+		  <img class="top-right" src="pic/balken.png"></img>
+		</a>
 
-<div class="section">Add tech client</div>
-<a class="top-right" href="testGlobalMenu.html">
-  <img class="top-right" src="balken.png"></img>
-</a>
-
-<input class="org-data-g" placeholder="Identifier"></input>
-<div class="container-text-form">
-  <div class="text-in-line">Secret:</div>
-  <div class="form-in-line">
-    <input class="org-reg-g" value="e3b0c44298fc1c149afbf4c8996fb92427ae4"></input>
-    <img class="in-line" src="update.png"></img>
-  </div>
+		<input class="org-data-g" placeholder="Identifier"></input>
+		<div class="container-text-form">
+		  <div class="text-in-line">Secret:</div>
+		  <div class="form-in-line">
+			<input class="org-reg-g" value="e3b0c44298fc1c149afbf4c8996fb92427ae4"></input>
+			<img class="in-line" src="pic/update.png"></img>
+		  </div>
+		</div>
+		<input class="org-data-g" placeholder="Redirect URL"></input>
+		<input class="org-data-g" placeholder="OAuth2 Handshake URL"></input>
+		<div class="container-text-form">
+		  <div class="check-b">Client type:</div>
+		  <div class="check-g">Grant Types:</div>
+		  <div class="check-b-m">
+			<input type="checkbox">Microservice</input>
+			<br>
+			<input type="checkbox">OAuth 2</input>
+		  </div>
+		  <div class="check-g-m">
+			<input type="checkbox">Client Credentials</input>
+			<br>
+			<input type="checkbox">Implicit</input>
+			<br>
+			<input type="checkbox">Password</input>
+			<br>
+			<input type="checkbox">Refresh Token</input>
+			<br>
+			<input type="checkbox">Authorization Code</input>
+		  </div>
+		</div>
+	</div>
+	
+	<div class="options-at-bottom">
+	  <a href="#" class="statement-button">Save</a>
+	</div>
 </div>
-<input class="org-data-g" placeholder="Redirect URL"></input>
-<input class="org-data-g" placeholder="OAuth2 Handshake URL"></input>
-<div class="container-text-form">
-  <div class="check-b">Client type:</div>
-  <div class="check-g">Grant Types:</div>
-  <div class="check-b-m">
-    <input type="checkbox">Microservice</input>
-    <br>
-    <input type="checkbox">OAuth 2</input>
-  </div>
-  <div class="check-g-m">
-    <input type="checkbox">Client Credentials</input>
-    <br>
-    <input type="checkbox">Implicit</input>
-    <br>
-    <input type="checkbox">Password</input>
-    <br>
-    <input type="checkbox">Refresh Token</input>
-    <br>
-    <input type="checkbox">Authorization Code</input>
-  </div>
-</div>
-
-<div class="options-at-bottom">
-  <a href="#" class="statement-button">Save</a>
-</div>
-
 </body>
 </html>
