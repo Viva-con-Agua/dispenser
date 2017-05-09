@@ -1,9 +1,10 @@
+import com.typesafe.sbt.packager.docker.Cmd
 
 name := """dispenser"""
 
 version := "0.1.0"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(DockerPlugin)
 
 scalaVersion := "2.11.7"
 
@@ -28,12 +29,8 @@ libraryDependencies ++= Seq(
 //libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.0.0"
 
 
-enablePlugins(sbtdocker.DockerPlugin)
 enablePlugins(play.sbt.PlayScala)
 //create docker and setup dockerfile
-dockerfile in docker := new Dockerfile {
-  from("alpine")
-}
 
 unmanagedResourceDirectories in Compile += baseDirectory.value / "app" / "views"
 
@@ -41,6 +38,9 @@ unmanagedResourceDirectories in Compile += baseDirectory.value / "app" / "views"
 libraryDependencies ++= Seq(
   ws
 )
-imageNames in docker := Seq(ImageName(s"${name.value}:${version.value}"))
 
+maintainer in Docker := "Dennis Kleber"
 
+dockerExposedPorts := Seq(9000, 9443)
+
+dockerRepository := Some("dispenser")

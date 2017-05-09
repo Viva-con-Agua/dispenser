@@ -25,8 +25,6 @@ addSbtPlugin("com.github.ddispaltro" % "sbt-reactjs" % "0.5.2")
 //docker plugin
 	
 
-addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % "1.4.1")
-
 //mustache
 resolvers += Resolver.url("julienba.github.com", url("http://julienba.github.com/repo/"))(Resolver.ivyStylePatterns)
 addSbtPlugin("org.jba" % "play2-plugins-mustache" % "1.1.3") // play 2.2
