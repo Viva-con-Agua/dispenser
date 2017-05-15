@@ -3,6 +3,7 @@ package models
 import play.api.libs.json.{JsPath, Json, OWrites, Reads}
 import java.util.{Date, UUID}
 import play.api.libs.functional.syntax._
+import models._
 /*
  * Models to handle templates. Dispenser Need a Json in Format: 
  *  
@@ -96,6 +97,7 @@ object TemplateData {
 case class Template(
   metaData: MetaData,
   templateData: TemplateData
+  globalMenu: Option[GlobalMenu]
   ) {
     def toTemplateString: Map[String, String] = Map(
     "microServiceName" -> this.metaData.microServiceName
@@ -106,17 +108,19 @@ case class Template(
 
 object Template{
   
-  def apply(tuple: (MetaData, TemplateData)) : Template = 
-    Template(tuple._1, tuple._2)
+  def apply(tuple: (MetaData, TemplateData, Option[GlobalMenu])) : Template = 
+    Template(tuple._1, tuple._2, tuple._3)
 
   implicit val templateWrites: OWrites[Template] = (
     (JsPath \ "metaData").write[MetaData] and
-    (JsPath \ "templateData").write[TemplateData]
+    (JsPath \ "templateData").write[TemplateData] and
+    (JsPath \ "globalMenu").writeNullable[GlobalMenu]
   )(unlift(Template.unapply))
   
   implicit val templateReads: Reads[Template] = (
     (JsPath \ "metaData").read[MetaData] and
-    (JsPath \ "templateData").read[TemplateData]
+    (JsPath \ "templateData").read[TemplateData] and
+    (JsPath \ "globalMenu").readNullable[GlobalMenu]
   ).tupled.map(Template( _ ))
 
 }
