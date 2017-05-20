@@ -10,11 +10,10 @@ html {
 
 body {
   font-family: "comic sans ms", sanf-serif;
-  font-size: 1em;
+  font-size: 100%;
   color: black;
   min-height: 100%;
   height: 100%;
-  /*position: relative;*/
   margin: 0;
   padding: 0;
   overflow: auto;
@@ -75,13 +74,9 @@ a.top-right {
 }
 a.top-right-glob-menu {
   display: block;
-  /*position: absolute;
-  float: right;*/
   position: fixed;
   top: 0;
   right: 0;
-  /*right: 0;
-  top: 0;*/
 }
 
 /*
@@ -89,7 +84,6 @@ a.top-right-glob-menu {
 */
 
 div.search {
-  /*position: relative;*/
   width: 90%;
   height: 2em;
   margin-right: 5%;
@@ -99,7 +93,6 @@ div.search {
   border-radius: 0.625em;
 }
 div.search1 {
- /* position: relative;*/
   width: 100%;
   height: 2em;
   margin-bottom: 1.25em;
@@ -108,7 +101,6 @@ div.search1 {
 }
 input.search {
   width: 80%;
-  /*position: absolute;*/
   display: inline-block;
   float: left;
   margin-top: 0.125em;
@@ -124,10 +116,8 @@ input.search:focus {
 img.search {
   height: 1.875em;
   display: inline-block;
-  /*position: absolute;*/
   margin-top: 0.0625em;
   margin-left: 0.1875em;
-  /*margin: 0;*/
   float: left;
 }
 input.found {
@@ -147,7 +137,6 @@ input.found {
 */
 
 div.list-of-users {
-  /*position: relative;*/
   width: 90%;
   height: 12.5em;
   margin-right: 5%;
@@ -157,21 +146,15 @@ div.list-of-users {
 }
 img.list-of-users {
   height: 12.5em;
-  /*position: absolute;*/
   display: inline-block;
   float: left;
-  /*top: 0px;
-  left: 0px;*/
   margin: 0;
 }
 div.user-info-in-list {
   height: 12.5em;
   width: 50%;
-  /*position: absolute;
-  top: 0px;*/
   display: inline-block;
   float: left;
-  /*margin: 0;*/
   border-left: 0.0625em solid black;
 }
 h1.user-name-1 {
@@ -209,7 +192,6 @@ div.options-at-bottom-half {
   display: block;
   float: right;
   height: 3.75em;
-  /*position: relative;*/
   margin-right: 5%;
   margin-bottom: 5%;
   margin-top: 2%;
@@ -307,8 +289,8 @@ a.add-region {
   flex-direction: column;
   list-style-type: none;
   overflow: auto;
+  font-size: 100%;
 }
-
 .white-button-in-the-list {
   background-color: white;
   border: solid black 0.125em;
@@ -318,7 +300,7 @@ a.add-region {
   margin-bottom: 0.25em;
   width: 100%;
   min-height: 5em;
-  font-size: 1em;
+  font-size: 100%;
 }
 
 .blue-button-in-the-list {
@@ -330,7 +312,7 @@ a.add-region {
   margin-bottom: 0.25em;
   width: 100%;
   min-height: 5em;
-  font-size: 1em;
+  font-size: 100%;
 }
 
 div.button-city {
@@ -345,7 +327,7 @@ div.button-city {
 div.button-discription-of-city {
   margin: 0%;
   padding: 0%;
-  font-size: 1.25em;
+  font-size: 1em;
   font-weight: normal;
   color: gray;
   text-align: left;
@@ -435,7 +417,6 @@ img.in-profile {
   width: 10%;
   display: inline-block;
   border: 0;
-  /*position: relative;*/
   float: left;
 }
 
@@ -458,7 +439,6 @@ div.employee-info {
 }
 
 div.container {
-  /*position: relative;*/
   margin-left: 5%;
 }
 
@@ -466,7 +446,6 @@ div.employee-info-img {
   font-size: 1.5em;
   color: black;
   text-align: left;
-  /*position: relative;*/
   float: left;
   left: 20%;
 }
@@ -493,7 +472,7 @@ input.data:valid {
   border-bottom: 0.1875em solid black;
 }
 
-button.register-password {
+.register-password {
   font-size: 1.5em;
   width: 30%;
   color: #085394;
@@ -830,20 +809,37 @@ img.centered-img-wide {
 ** #PROFILE-IMAGE
 */
 
-button.upload-button {
+.upload-button-l {
   background-color: white;
   border: solid black 0.185em;
   color: black;
   font-size: 2em;
-  width: 49%;
+  width: 47%;
   height: 5em;
   margin-right: 1%;
   margin-bottom: 2%;
   box-shadow: 5px 5px 5px black;
   text-align: center;
   text-decoration: none;
-  display: block;
   float: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.upload-button-r {
+  background-color: white;
+  border: solid black 0.185em;
+  color: black;
+  font-size: 2em;
+  width: 47%;
+  height: 5em;
+  margin-right: 1%;
+  margin-bottom: 2%;
+  box-shadow: 5px 5px 5px black;
+  text-align: center;
+  text-decoration: none;
+  float: right;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -855,36 +851,114 @@ div.text-in-upload {
   margin: 0;
   padding: 0;
 }
-button.cancel-button {
-    background-color: #cc0000;
-    border: solid black 0.185em;
-    color: white;
-	font-size: 2em;
-	width: 49%;
-	height: 7em;
-	margin-right: 1%;
-	margin-bottom: 2%;
-	box-shadow: 5px 5px 5px black;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-	float: left;
+div.text-in-statement {
+  color: white;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
 }
-button.save-button {
-    background-color: #6aa84f;
-    border: solid black 0.185em;
-    color: white;
-	font-size: 2em;
-	width: 49%;
-	height: 7em;
-	margin-right: 1%;
-	margin-bottom: 2%;
-	box-shadow: 5px 5px 5px black;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-	float: left;
+.cancel-button {
+  background-color: #cc0000;
+  border: solid black 0.185em;
+  color: white;
+  font-size: 2em;
+  width: 47%;
+  height: 7em;
+  margin-right: 1%;
+  margin-bottom: 2%;
+  box-shadow: 5px 5px 5px black;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  float: left;
+  justify-content: center;
+  align-items: center;
+}
+.save-button {
+  background-color: #6aa84f;
+  border: solid black 0.185em;
+  color: white;
+  font-size: 2em;
+  width: 47%;
+  height: 7em;
+  margin-right: 1%;
+  margin-bottom: 2%;
+  box-shadow: 5px 5px 5px black;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  float: right;
+  justify-content: center;
+  align-items: center;
 }
 img.in-upload-button {
   width: 2em;
+}
+
+/*
+** #DROP-DOWN-MENU
+*/
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+header {
+  height: 0;
+  left: 0;
+  padding: 1em;
+  position: fixed;
+  text-align: right;
+  top: 0;
+  transition: transform 0.6s;
+  width: 100%;
+  z-index: 500;
+}
+
+main {
+  transform-origin: left center;
+  transition: transform 0.6s 50ms;
+}
+
+.nav-button {
+  text-transform: uppercase;
+}
+
+.nav-wrapper {
+  height: 100%;
+  perspective: 1000px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
+  transition: transform 0.6s, visibility 0.6s;
+  visibility: hidden;
+  width: 80%;
+}
+.nav-visible .nav-wrapper {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.nav {
+  position: relative;
+  transform: rotateY(90deg);
+  transform-origin: left center;
+  transition: transform 0.6s;
+}
+.nav-visible .nav {
+  transform: rotateY(0deg);
+}
+
+.balken {
+  width: 4em;
+}
+
+.button-lines {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  -webkit-user-select: none;
+  user-select: none;
 }
