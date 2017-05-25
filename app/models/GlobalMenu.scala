@@ -4,7 +4,10 @@ import play.api.libs.json.{JsPath, Json, OWrites, Reads}
 import java.util.{Date, UUID}
 import play.api.libs.functional.syntax._
 
-
+/**
+ *Global Menu Json for construct Menu entrys
+ *
+ */
 
 
 
