@@ -18,17 +18,17 @@ import play.api.libs.functional.syntax._
  */
 
 
-case class MenuEntry {
+case class MenuEntry (
   name: String,
   titel: String,
   url: String,
   root: String,
   sub: Option[List[String]]
-}
+)
 
 object MenuEntry {
 
-  def apply(tuple: (String, String, String, Option[List[String]]): MenuEntry =
+  def apply(tuple: (String, String, String, Option[List[String]])): MenuEntry =
     MenuEntry(tuple._1, tuple._2, tuple._3, tuple._4)
 
   implicit val menuEntryWrites: OWrites[MenuEntry] = (
