@@ -31,6 +31,7 @@ trait NavigationDAO extends ObjectIdResolver {
 }
 
 class NavigationEntryDAO @Inject() (val reactiveMongoApi: ReactiveMongoApi) extends NavigationDAO with MongoController with ReactiveMongoComponents {
+ // lazy val reactiveMongoApi = current.injector.instanceOf[ReactiveMongoApi]
   val navigationEntrys = reactiveMongoApi.db.collection[JSONCollection]("navigationEntrys")
   
   override def getObjectId(id: UUID):Future[Option[ObjectIdWrapper]] = 
@@ -45,7 +46,7 @@ class NavigationEntryDAO @Inject() (val reactiveMongoApi: ReactiveMongoApi) exte
   def find(name: String):Future[Option[NavigationEntry]] = 
     navigationEntrys.find(Json.obj("name" -> name)).one[NavigationEntry]
 
-  def save(micro: Micro):Future[NavigationEntry] = 
-    navigationEntry.insert(navigationEntry).map(_ => navigationEntry)
+  def save(navigationEntry: NavigationEntry):Future[NavigationEntry] = 
+    navigationEntrys.insert(navigationEntry).map(_ => navigationEntry)
 
 }

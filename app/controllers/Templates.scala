@@ -31,6 +31,5 @@ class Templates @Inject() (
     Ok(scalate.render("mustache/" + templateName +".mustache" , template.toTemplateString))
     //}
   }
-  def getMenu = Action(validateJson[Menu]) { request =>
     
 }

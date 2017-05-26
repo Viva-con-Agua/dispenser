@@ -97,7 +97,6 @@ object TemplateData {
 case class Template(
   metaData: MetaData,
   templateData: TemplateData
-  globalMenu: Option[GlobalMenu]
   ) {
     def toTemplateString: Map[String, String] = Map(
     "microServiceName" -> this.metaData.microServiceName
@@ -108,19 +107,17 @@ case class Template(
 
 object Template{
   
-  def apply(tuple: (MetaData, TemplateData, Option[GlobalMenu])) : Template = 
-    Template(tuple._1, tuple._2, tuple._3)
+  def apply(tuple: (MetaData, TemplateData)) : Template = 
+    Template(tuple._1, tuple._2)
 
   implicit val templateWrites: OWrites[Template] = (
     (JsPath \ "metaData").write[MetaData] and
-    (JsPath \ "templateData").write[TemplateData] and
-    (JsPath \ "globalMenu").writeNullable[GlobalMenu]
+    (JsPath \ "templateData").write[TemplateData] 
   )(unlift(Template.unapply))
   
   implicit val templateReads: Reads[Template] = (
     (JsPath \ "metaData").read[MetaData] and
-    (JsPath \ "templateData").read[TemplateData] and
-    (JsPath \ "globalMenu").readNullable[GlobalMenu]
+    (JsPath \ "templateData").read[TemplateData] 
   ).tupled.map(Template( _ ))
 
 }

@@ -1,4 +1,4 @@
-package models
+/*package models
 
 case class TemplateBase(
   title: String,
@@ -8,8 +8,7 @@ case class TemplateBase(
 object TemplateBase {
 
   def apply(tuple: (String, String)) : TemplateBase =
-    TemplateBase(tuple._1, C:q
-    tuple._2)
+    TemplateBase(tuple._1, tuple._2)
 
   implicit val templateBaseWrites: OWrites[TemplateBase] = (
     (JsPath \ "title").write[String] and
@@ -20,4 +19,4 @@ object TemplateBase {
     (JsPath \ "title").read[String] and
     (JsPath \ "body").read[String]
   ).tupled.map(TemplateBase( _ ))
-}
+}*/
