@@ -3,6 +3,7 @@ package models
 import play.api.libs.json.{JsPath, Json, OWrites, Reads}
 import java.util.{Date, UUID}
 import play.api.libs.functional.syntax._
+import models._
 /*
  * Models to handle templates. Dispenser Need a Json in Format: 
  *  
@@ -111,12 +112,12 @@ object Template{
 
   implicit val templateWrites: OWrites[Template] = (
     (JsPath \ "metaData").write[MetaData] and
-    (JsPath \ "templateData").write[TemplateData]
+    (JsPath \ "templateData").write[TemplateData] 
   )(unlift(Template.unapply))
   
   implicit val templateReads: Reads[Template] = (
     (JsPath \ "metaData").read[MetaData] and
-    (JsPath \ "templateData").read[TemplateData]
+    (JsPath \ "templateData").read[TemplateData] 
   ).tupled.map(Template( _ ))
 
 }

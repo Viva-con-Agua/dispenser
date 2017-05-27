@@ -2,7 +2,7 @@ import com.typesafe.sbt.packager.docker.Cmd
 
 name := """dispenser"""
 
-version := "0.1.0"
+version := "0.1.11"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(DockerPlugin)
 
@@ -14,6 +14,7 @@ libraryDependencies ++= Seq(
   jdbc,
   cache,
   ws,
+	"com.typesafe.play" %% "play-mailer" % "3.0.1",
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
   "com.nulab-inc" %% "play2-oauth2-provider" % "1.2.0",
 //  "org.reactivemongo" %% "reactivemongo" % "0.12.1",
@@ -23,7 +24,9 @@ libraryDependencies ++= Seq(
   "org.webjars" % "react" % "0.13.3",
   "com.github.tototoshi" %% "play-scalate" % "0.3.0",
   "org.scalatra.scalate" %% "scalate-core" % "1.7.1",
-  "org.scala-lang" % "scala-compiler" % scalaVersion.value
+  "org.scala-lang" % "scala-compiler" % scalaVersion.value,
+	"net.codingwell" %% "scala-guice" % "4.0.0",
+	"net.ceedubs" %% "ficus" % "1.1.2"
 )
 //add mongoDB driver
 //libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.0.0"

@@ -28,7 +28,8 @@ class Templates @Inject() (
     //templateName match {
       //case "simpleTemplate" => 
         
-    Ok(scalate.render(templateName +".mustache" , template.toTemplateString))
+    Ok(scalate.render("mustache/" + templateName +".mustache" , template.toTemplateString))
     //}
   }
+    
 }
