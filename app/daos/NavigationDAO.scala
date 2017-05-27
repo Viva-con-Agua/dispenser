@@ -11,15 +11,13 @@ import scala.concurrent.duration._
 import play.api.Play.current
 
 
-import play.modules.reactivemongo.{ // ReactiveMongo Play2 plugin
-  MongoController,
-  ReactiveMongoApi,
-  ReactiveMongoComponents
-}
+import play.api.mvc.Controller
+import play.modules.reactivemongo._
 
 import play.modules.reactivemongo.ReactiveMongoApi
 import play.modules.reactivemongo.json._
 import play.modules.reactivemongo.json.collection.JSONCollection
+import reactivemongo.bson.BSONObjectID
 
 import models.{Micro, ObjectIdWrapper, NavigationEntry, NavigationRoot}
 
@@ -29,13 +27,13 @@ trait NavigationDAO extends ObjectIdResolver {
   def saveEntry(navigationEntry: NavigationEntry): Future[NavigationEntry]
   def findRoot(id: UUID): Future[Option[NavigationRoot]]
   def findRoot(name: String): Future[Option[NavigationRoot]]
-  def saveRoot(navigationEntry: NavigationRoot): Future[NavigationRoot]
+  def saveRoot(navigationRoot: NavigationRoot): Future[NavigationRoot]
 
 
 }
 
-class NavigationEntryDAO @Inject() (val reactiveMongoApi: ReactiveMongoApi) extends NavigationDAO with MongoController with ReactiveMongoComponents {
- // lazy val reactiveMongoApi = current.injector.instanceOf[ReactiveMongoApi]
+class NavigationEntryDAO @Inject() (val reactiveMongoApi: ReactiveMongoApi) extends NavigationDAO with Controller with MongoController with ReactiveMongoComponents   {
+  //lazy val reactiveMongoApi = current.injector.instanceOf[ReactiveMongoApi]
   val navigationEntrys = reactiveMongoApi.db.collection[JSONCollection]("navigationEntrys")
   val navigationRoots = reactiveMongoApi.db.collection[JSONCollection]("navigationRoots")
 
@@ -60,8 +58,8 @@ class NavigationEntryDAO @Inject() (val reactiveMongoApi: ReactiveMongoApi) exte
   def findRoot(name: String):Future[Option[NavigationRoot]] = 
     navigationRoots.find(Json.obj("name" -> name)).one[NavigationRoot]
 
-  def saveRoot(navigationEntry: NavigationRoot):Future[NavigationRoot] = 
-    navigationRoots.insert(navigationEntry).map(_ => navigationEntry)
+  def saveRoot(navigationRoot: NavigationRoot):Future[NavigationRoot] = 
+    navigationRoots.insert(navigationRoot).map(_ => navigationRoot)
   
 
 }
