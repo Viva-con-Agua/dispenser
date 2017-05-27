@@ -1,0 +1,451 @@
+@standart-font-size: 1.5em;
+@standart-font-color: black;
+@border-opt-bottom: 0.0625em;
+@box-shadow-opt-bottom: 0.1875em;
+@standart-bottom-input: 0.1875em solid black;
+
+.standart-border-input {
+  border: 0;
+  border-bottom: @standart-bottom-input;
+}
+
+.standart-font {
+  font-size: @standart-font-size;
+  color: @standart-font-color;
+}
+
+/*
+** #BODY
+*/
+
+body {
+  font-family: "comic sans ms", sanf-serif;
+  font-size: 1em;
+  color: @standart-font-color;
+}
+
+/*
+** #SECTION
+*/
+
+div.section {
+  font-size: 5em;
+  text-align: left;
+}
+
+/*
+** #SEARCH
+*/
+
+div.search {
+  border: 0.125em solid black;
+  border-radius: 0.625em;
+}
+div.search1 {
+  border: 0.125em solid black;
+  border-radius: 0.625em;
+}
+input.search {
+  border: 0px;
+  .standart-font;
+}
+input.search:focus {
+  border-color: white;
+}
+input.found {
+  border: 0.125em solid black;
+  text-align: left;
+  .standart-font;
+}
+
+/*
+** #LIST-OF-USERS
+*/
+
+div.list-of-users {
+  border: 0.0625em solid black;
+}
+div.user-info-in-list {
+  border-left: 0.0625em solid black;
+}
+h1.user-name-1 {
+  .standart-font;
+  text-align: left;
+}
+p.user-position-1 {
+  font-size: 1em;
+  color: grey;
+  text-align: left;
+}
+
+/*
+** #OPTIONS-AT-BOTTOM
+*/
+
+div.options-at-bottom {
+  border: 0;
+  font-size: @standart-font-size;
+}
+div.options-at-bottom-half {
+  border: 0;
+  font-size: @standart-font-size;
+}
+a.delete-button {
+  border: @standart-bottom-input;
+  background-color: red;
+  font-weight: normal;
+  text-align: center;
+  color: white;
+  box-shadow: @box-shadow-opt-bottom @box-shadow-opt-bottom black;
+  text-decoration: none;
+  font-size: 1em;
+}
+a.delete-button:hoover {
+  border: @standart-bottom-input;
+  background-color: red;
+  font-weight: normal;
+  color: white;
+  box-shadow: @box-shadow-opt-bottom @box-shadow-opt-bottom black;
+}
+a.statement-button {
+  border: @standart-bottom-input;
+  background-color: white;
+  font-weight: normal;
+  color: @standart-font-color;
+  text-align: center;
+  box-shadow: @box-shadow-opt-bottom @box-shadow-opt-bottom black;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+/*
+** #EDIT-REGION
+*/
+
+input.city {
+  text-align: left;
+  .standart-font;
+}
+input.city:valid {
+  .standart-bottom-input;
+}
+select.region {
+  .standart-font;
+  border: @standart-bottom-input;
+}
+a.add-region {
+  font-size: @standart-font-size;
+  color: blue;
+  border-bottom: 2px solid blue;
+}
+
+/*
+** #CREWS
+*/
+
+button.white-button-in-the-list {
+  background-color: white;
+  border: solid black 0.125em;
+  font-size: 1em;
+}
+
+button.blue-button-in-the-list {
+  background-color: #93bee5;
+  border: solid black 0.125em;
+  font-size: 1em;
+}
+
+div.button-city {
+  font-size: 1.75em;
+  font-weight: bold;
+  color: @standart-font-color;
+  text-align: left;
+}
+
+div.button-discription-of-city {
+  font-size: 1.25em;
+  font-weight: normal;
+  color: gray;
+  text-align: left;
+}
+
+/*
+** #GLOBAL-MENU
+*/
+
+div.global-menu {
+  background: #6fa8dc;
+  font-size: 1.5em;
+  font-weight: bold;
+  border: solid black 0.125em;
+}
+
+.in-global-menu {
+  color: @standart-font-color;
+  font-size: 3em;
+  font-style: normal;
+  background-color: #6fa8dc;
+  border: 0;
+  text-decoration: none;
+}
+.simple {
+  color: black;
+  text-decoration: none;
+}
+.simple:active {
+  color: black;
+  text-decoration: none;
+}
+
+/*
+** #EMPLOYEE
+*/
+
+img.profile {
+  border: solid black 0.125em;
+}
+
+img.profile1 {
+  border: 0;
+}
+
+img.profile-l {
+  border: 0;
+}
+
+img.in-profile {
+  border: 0;
+}
+
+div.employee-main-info {
+  font-size: 1.5em;
+  color: @standart-font-color;
+  text-align: left;
+}
+
+div.employee-info {
+  font-size: 1.25em;
+  color: gray;
+  text-align: left;
+}
+
+div.employee-info-img {
+  .standart-font;
+  text-align: left;
+}
+
+/*
+** #LOGIN
+*/
+
+input.data {
+  text-align: center;
+  .standart-font;
+  color: gray;
+}
+
+input.data:valid {
+  .standart-bottom-input;
+}
+
+button.register-password {
+  font-size: @standart-font-size;
+  color: #085394;
+  background-color: white;
+  border: 0;
+  text-decoration: underline;
+}
+
+/*
+** #EDIT-ORGANIZATION
+*/
+
+input.org-data-r {
+  text-align: left;
+  .standart-font;
+}
+input.org-data-r:valid {
+  .standart-border-input;
+}
+input.org-data-g {
+  text-align: left;
+  .standart-font;
+  font-style: italic;
+}
+input.org-data-g:valid {
+  .standart-border-input;
+}
+input.org-data-p {
+  text-align: left;
+  font-size: @standart-font-size;
+  color: gray;
+  font-style: italic;
+}
+input.org-data-p:valid {
+  .standart-border-input;
+}
+input.org-data-s {
+  text-align: left;
+  .standart-font;
+}
+input.org-data-s:valid {
+  .standart-border-input;
+}
+
+/*
+** #REGION-VIEW
+*/
+
+ul.region-view {
+  list-style-image: url('cross.png');
+}
+ul.region-view li {
+  text-align: left;
+  .standart-font;
+}
+
+/*
+** #REGISTER
+*/
+
+div.text-in-line {
+  .standart-font;
+}
+input.org-reg {
+  text-align: left;
+  .standart-font;
+}
+input.org-reg:valid {
+  border: @standart-bottom-input;
+}
+select.sex {
+  .standart-font;
+  border: @standart-bottom-input;
+}
+div.little-letter {
+  text-align: justify;
+  font-size: 1em;
+}
+div.little-letter-p {
+  text-align: justify;
+  font-size: 1em;
+}
+
+/*
+** #ADD-TECH-CLIENT
+*/
+
+input.org-reg-g {
+  text-align: left;
+  font-style: italic;
+  font-size: 1.5em;
+  color: gray;
+}
+input.org-reg-g:valid {
+  .standart-border-input;
+}
+div.check-b {
+  .standart-font;
+}
+div.check-b-wide {
+  .standart-font;
+  text-align: left;
+}
+div.check-g {
+  font-size: @standart-font-size;
+  color: gray;
+}
+div.check-b-m {
+  font-size: 1em;
+  color: @standart-font-color;
+}
+div.check-g-m {
+  font-size: 1em;
+  color: gray;
+}
+
+/*
+** #YOUR-PROFILE
+*/
+
+div.little-letter-l {
+  text-align: right;
+  color: @standart-font-color;
+}
+ul.nav-bar {
+  list-style-type: none;
+  overflow: hidden;
+  background-color: white;
+  border: @standart-bottom-input;
+}
+a.link-nav {
+  color: @standart-font-color;
+  text-align: center;
+  text-decoration: none;
+  font-size: 2em;
+  background-color: white;
+}
+a.link-nav:visited {
+  color: @standart-font-color;
+  text-align: center;
+  text-decoration: none;
+  font-size: 2em;
+  background-color: white;
+}
+a.link-nav:hover {
+  background-color: #95bcf2;
+}
+a.link-nav:active {
+  color: standart-font-color;
+  text-align: center;
+  text-decoration: none;
+  font-size: 2em;
+  background-color: #95bcf2;
+}
+div.section-in-your-profile {
+  border: @standart-bottom-input;
+}
+div.section-in-your-profile-b {
+  border: @standart-bottom-input;
+}
+div.centered {
+  font-size: 2em;
+  color: black;
+  text-align: center;
+}
+
+/*
+** #PROFILE-IMAGE
+*/
+
+button.upload-button {
+  background-color: white;
+  border: @standart-bottom-input;
+  color: @standart-font-color;
+  font-size: 2em;
+  box-shadow: 5px 5px 5px black;
+  text-align: center;
+  text-decoration: none;
+}
+div.text-in-upload {
+  color: black;
+  font-size: 1em;
+}
+button.cancel-button {
+  background-color: #cc0000;
+  border: @standart-bottom-input;
+  color: white;
+  font-size: 2em;
+  box-shadow: 5px 5px 5px black;
+  text-align: center;
+  text-decoration: none;
+}
+button.save-button {
+  background-color: #6aa84f;
+  border: @standart-bottom-input;
+  color: white;
+  font-size: 2em;
+  box-shadow: 5px 5px 5px black;
+  text-align: center;
+  text-decoration: none;
+}
