@@ -21,6 +21,16 @@ import reactivemongo.bson.BSONObjectID
 
 import models.{Micro, ObjectIdWrapper, NavigationEntry, NavigationRoot}
 
+/** trait for NavigationDAO functions
+ * use @class NavigationEntryDAO, ObjectId and mongodb
+ * @param findEntry find Entry via name or id
+ * @param saveEntry save NavigationEntry 
+ * @param findRoot  find Root by id or name
+ * @param saveRoot  save NavigationRoot
+ *
+ */
+
+
 trait NavigationDAO extends ObjectIdResolver {
   def findEntry(id: UUID): Future[Option[NavigationEntry]]
   def findEntry(name: String): Future[Option[NavigationEntry]]

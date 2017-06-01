@@ -2,6 +2,13 @@ package models
 
 import play.api.libs.json.Json
 
+
+/**
+ * create ObjectId in json format
+ * create Wrapper for the ObjectId
+ * 
+ */
+
 case class ObjectId($oid : String)
 
 object ObjectId {

@@ -6,6 +6,14 @@ import play.api.libs.functional.syntax._
 import java.util.{Date, UUID}
 
 
+/** models for navigaton function
+ *  not final
+ */
+
+
+
+
+
 
 case class NavigationEntryStub (
   name: String,
