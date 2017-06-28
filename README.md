@@ -45,6 +45,6 @@ simpleTemplate: header, body:
 ChangeLog
 =========
 
-## Version 0.1.12 (2017-04-24)
+## Version 0.1.12 (2017-06-28)
 
 *	[[F] #3 - handle HTML Template](https://github.com/Viva-con-Agua/dispenser/issues/3)
