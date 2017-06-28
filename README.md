@@ -24,18 +24,27 @@ Dispenser can render HTML-Files with custom Context. For this you can simply sen
 	},
 	templateData: {
 		title: "",
+		header:"", 
 		body: ""
 	}
 }
 ```
 
 
-to Dispenser @ URL/getTemplate.  
+to Dispenser @  https://vca.informatik.hu-berlin.de/api/dispenser/getTemplate
+  
+TEMPLATE-FILES
+==============
 
+The name of the template must be specified in the template variable of the json.
+
+Used variable:
+
+simpleTemplate: header, body:
 
 ChangeLog
 =========
 
-## Version 0.1.0 (2017-04-24)
+## Version 0.1.12 (2017-04-24)
 
 *	[[F] #3 - handle HTML Template](https://github.com/Viva-con-Agua/dispenser/issues/3)

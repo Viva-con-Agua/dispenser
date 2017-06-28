@@ -2,7 +2,7 @@ import com.typesafe.sbt.packager.docker.Cmd
 
 name := """dispenser"""
 
-version := "0.1.11"
+version := "0.1.12"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(DockerPlugin)
 
@@ -46,4 +46,4 @@ maintainer in Docker := "Dennis Kleber"
 
 dockerExposedPorts := Seq(9000, 9443)
 
-dockerRepository := Some("dispenser")
+dockerRepository := Some("vivaconagua")

@@ -74,21 +74,24 @@ object MetaData {
 
 case class TemplateData(
   title: String,
+  header: String,
   body: String
 )
 
 object TemplateData {
 
-  def apply(tuple: (String, String)) : TemplateData =
-    TemplateData(tuple._1, tuple._2)
+  def apply(tuple: (String,String, String)) : TemplateData =
+    TemplateData(tuple._1, tuple._2, tuple._3)
 
   implicit val templateDataWrites: OWrites[TemplateData] = (
     (JsPath \ "title").write[String] and
+    (JsPath \ "header").write[String] and
     (JsPath \ "body").write[String]
   )(unlift(TemplateData.unapply))
 
   implicit val templateDataReads:  Reads[TemplateData] = (
     (JsPath \ "title").read[String] and
+    (JsPath \ "header").read[String] and
     (JsPath \ "body").read[String]
   ).tupled.map(TemplateData( _ ))
 }
@@ -100,7 +103,7 @@ case class Template(
   ) {
     def toTemplateString: Map[String, String] = Map(
     "microServiceName" -> this.metaData.microServiceName
-    ,"title" ->  this.templateData.title
+    ,"header" ->  this.templateData.title
     ,"body" -> this.templateData.body
     )
 }

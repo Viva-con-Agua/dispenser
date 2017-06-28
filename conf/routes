@@ -10,7 +10,7 @@ GET   /admin 										controllers.Admin.index
 GET   /messages                 controllers.Application.getMessages
 GET   /javascriptRoutes         controllers.Application.javascriptRoutes
 
-POST   /test 										controllers.Templates.getTemplate
+POST   /getTemplate 						controllers.Templates.getTemplate
 POST   /navigation/root         controllers.Navigation.createNavigationRoot
 POST   /navigation/entry        controllers.Navigation.createNavigationEntry
 
