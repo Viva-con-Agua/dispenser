@@ -43,16 +43,18 @@ class Templates @Inject() (
    * 
    *@return html or 404 
    */
-
+  
 
   def getTemplate = Action(validateJson[Template]) { request =>
     val template = request.body
+   // val url = controllers.routes.Assets.at("drop.png")
+   // println(url)
     val templateName = template.metaData.template 
-    val templateData = views.html.mustache.main()
+
     //templateName match {
       //case "simpleTemplate" => 
         
-    Ok(scalate.render("mustache/simpleTemplate.mustache", Map("header"-> templateData.body)))
+    Ok(scalate.render("mustache/" + templateName + ".mustache", template.toTemplateString))
     //}
   }
   def getImageUrl(imageName : String) = Action{ request =>

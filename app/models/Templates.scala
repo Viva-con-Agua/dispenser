@@ -102,7 +102,8 @@ case class Template(
   templateData: TemplateData
   ) {
     def toTemplateString: Map[String, String] = Map(
-    "microServiceName" -> this.metaData.microServiceName
+    "hostURL" -> "http://0.0.0.0:9000"
+    ,"microServiceName" -> this.metaData.microServiceName
     ,"header" ->  this.templateData.title
     ,"body" -> this.templateData.body
     )

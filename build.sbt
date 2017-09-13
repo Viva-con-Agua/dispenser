@@ -31,6 +31,9 @@ libraryDependencies ++= Seq(
 //add mongoDB driver
 //libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.0.0"
 
+//includeFilter in (Assets, LessKeys.less) := "vca.less" // | "bar.less"
+includeFilter in (Assets, LessKeys.less) := "*.less"
+excludeFilter in (Assets, LessKeys.less) := "_*.less"
 
 enablePlugins(play.sbt.PlayScala)
 //create docker and setup dockerfile
