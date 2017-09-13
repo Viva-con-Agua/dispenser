@@ -106,6 +106,7 @@ case class Template(
     ,"microServiceName" -> this.metaData.microServiceName
     ,"header" ->  this.templateData.title
     ,"body" -> this.templateData.body
+    ,"title" -> this.templateData.title
     )
 }
 

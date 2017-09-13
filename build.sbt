@@ -26,7 +26,10 @@ libraryDependencies ++= Seq(
   "org.scalatra.scalate" %% "scalate-core" % "1.7.1",
   "org.scala-lang" % "scala-compiler" % scalaVersion.value,
 	"net.codingwell" %% "scala-guice" % "4.0.0",
-	"net.ceedubs" %% "ficus" % "1.1.2"
+	"net.ceedubs" %% "ficus" % "1.1.2",
+	//"org.webjars" % "bootstrap" % "3.3.4",
+	"com.adrianhurt" %% "play-bootstrap" % "1.2-P25-B3"
+
 )
 //add mongoDB driver
 //libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.0.0"

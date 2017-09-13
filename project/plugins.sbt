@@ -21,7 +21,7 @@ addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "5.1.0")
 
 addSbtPlugin("com.github.ddispaltro" % "sbt-reactjs" % "0.5.2")
 
-
+addSbtPlugin("com.typesafe.sbt" % "sbt-less" % "1.0.6")
 //docker plugin
 	
 
