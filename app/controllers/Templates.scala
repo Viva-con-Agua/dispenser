@@ -1,6 +1,9 @@
 package controllers
 
 
+
+import play.api.Play.current
+import play.Environment
 import play.api._
 import play.api.cache._
 import play.api.mvc._
@@ -19,6 +22,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 class Templates @Inject() (
   scalate: Scalate
   ,cache: CacheApi
+  ,implicit val env: Environment
 ) extends Controller{
 
   /** checks whether a json is validate or not
@@ -44,12 +48,21 @@ class Templates @Inject() (
   def getTemplate = Action(validateJson[Template]) { request =>
     val template = request.body
     val templateName = template.metaData.template 
-    
+    val templateData = views.html.mustache.main()
     //templateName match {
       //case "simpleTemplate" => 
         
-    Ok(scalate.render("mustache/" + templateName +".mustache" , template.toTemplateString))
+    Ok(scalate.render("mustache/simpleTemplate.mustache", Map("header"-> templateData.body)))
     //}
   }
+  def getImageUrl(imageName : String) = Action{ request =>
+      var file = env.getFile("../../../public/images/" + imageName + ".png")
+      val source = scala.io.Source.fromFile(file)(scala.io.Codec.ISO8859)
+      val byteArray = source.map(_.toByte).toArray
+      source.close()
+      Ok(byteArray).as("images/html")
+
+    }
+  
     
 }
