@@ -51,8 +51,8 @@ class Templates @Inject() (
       case "navigation_top" => {
         val head = scalate.render("mustache/header/header_single.mustache", template.toTemplateString).toString
         val body = scalate.render("mustache/navigate/navigate_top.mustache", template.toTemplateString).toString
-        Ok(scalate.render("mustache/main.mustache", Map("head" -> head,
-                                                    "body" -> body
+        Ok(scalate.render("mustache/main.mustache", Map("HEAD" -> head,
+                                                    "BODY" -> body
                                                          )))
       }
       case _ => BadRequest("Template wird nicht supported")
@@ -63,5 +63,7 @@ class Templates @Inject() (
   def get_html_header (header : String, title : String) : String = {
     return(scalate.render("mustache/header/" + header + ".mustache", Map{"title" -> title; "NEXT_BODY" -> ""}).toString)
   }
-    
+/**
+  def build_navigation_content (validateJson[Navigation]) 
+*/    
 }

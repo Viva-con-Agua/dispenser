@@ -19,7 +19,7 @@ import play.modules.reactivemongo.json._
 import play.modules.reactivemongo.json.collection.JSONCollection
 import reactivemongo.bson.BSONObjectID
 
-import models.{Micro, ObjectIdWrapper, NavigationEntry, NavigationRoot}
+//import models.{Micro, ObjectIdWrapper, NavigationEntry, NavigationRoot}
 
 /** trait for NavigationDAO functions
  * use @class NavigationEntryDAO, ObjectId and mongodb
@@ -30,7 +30,7 @@ import models.{Micro, ObjectIdWrapper, NavigationEntry, NavigationRoot}
  *
  */
 
-
+/**
 trait NavigationDAO extends ObjectIdResolver {
   def findEntry(id: UUID): Future[Option[NavigationEntry]]
   def findEntry(name: String): Future[Option[NavigationEntry]]
@@ -72,4 +72,4 @@ class NavigationEntryDAO @Inject() (val reactiveMongoApi: ReactiveMongoApi) exte
     navigationRoots.insert(navigationRoot).map(_ => navigationRoot)
   
 
-}
+}*/
