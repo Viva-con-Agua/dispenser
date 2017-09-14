@@ -99,7 +99,8 @@ object TemplateData {
 
 case class Template(
   metaData: MetaData,
-  templateData: TemplateData
+  templateData: TemplateData,
+  navigationData: Option[Navigation]
   ) {
     def toTemplateString: Map[String, String] = Map(
     "hostURL" -> "http://0.0.0.0:9000"
@@ -112,17 +113,19 @@ case class Template(
 
 object Template{
   
-  def apply(tuple: (MetaData, TemplateData)) : Template = 
-    Template(tuple._1, tuple._2)
+  def apply(tuple: (MetaData, TemplateData, Option[Navigation])) : Template = 
+    Template(tuple._1, tuple._2, tuple._3)
 
   implicit val templateWrites: OWrites[Template] = (
     (JsPath \ "metaData").write[MetaData] and
-    (JsPath \ "templateData").write[TemplateData] 
+    (JsPath \ "templateData").write[TemplateData] and
+    (JsPath \ "navigationData").writeNullable[Navigation]
   )(unlift(Template.unapply))
   
   implicit val templateReads: Reads[Template] = (
     (JsPath \ "metaData").read[MetaData] and
-    (JsPath \ "templateData").read[TemplateData] 
+    (JsPath \ "templateData").read[TemplateData] and
+    (JsPath \ "navigationData").readNullable[Navigation]
   ).tupled.map(Template( _ ))
 
 }
