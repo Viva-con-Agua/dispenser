@@ -9,10 +9,10 @@ import play.api.libs.concurrent.Execution.Implicits._
 import play.api.libs.mailer.MailerClient
 import play.api.libs.ws.WSClient
 import daos._
-
+/*
 class Module extends AbstractModule with ScalaModule {
 
   def configure() {
     bind[NavigationDAO].to[NavigationEntryDAO]
   }
-}
+}*/
