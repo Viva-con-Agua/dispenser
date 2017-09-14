@@ -15,7 +15,12 @@ import java.util.{Date, UUID}
 case class NavigationEntry(
   entry_Lable: String,
   entry_URL: String
-  )
+  ) {
+    def toStringMap: Map[String, String] = Map(
+      "entryLable" -> this.entry_Lable,
+      "entryURL" -> this.entry_URL
+    )
+  }
 
 object NavigationEntry {
 
