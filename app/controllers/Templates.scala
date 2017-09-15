@@ -1,6 +1,6 @@
 package controllers
 
-
+import java.io.IOException
 
 import play.api.Play.current
 import play.Environment
@@ -47,20 +47,24 @@ class Templates @Inject() (
   def getTemplate = Action(validateJson[Template]) { request =>
     val template = request.body
     val templateName = template.metaData.template
-    var navigation = ""
     templateName match  {
-      case "navigation_top" => {
-        val head = scalate.render("mustache/header/header_single.mustache", template.toTemplateString).toString
-        template.navigationData match {
-          case Some(nav) => navigation = build_navigation_content(nav)
-          case None => BadRequest("No Navigation Set")
+      case "navigation_top_full" => {
+        try {
+          Ok(build_navigation_top(template))
+        }catch{
+          case ex: Exception => {
+            BadRequest(ex.toString)
+          }
         }
-        val body = scalate.render("mustache/navigate/navigate_top.mustache", Map(
-          "navbarContent" -> navigation,
-          "hostURL" -> "http//0.0.0.0:9000")).toString
-        Ok(scalate.render("mustache/main.mustache", Map("HEAD" -> head,
-                                                    "BODY" -> body
-                                                         )))
+      }
+      case "navigation_top" => {
+        try {
+          Ok(build_navigation_top(template))
+        }catch{
+          case ex: Exception => {
+            BadRequest(ex.toString)
+          }
+        }
       }
       case _ => BadRequest("Template wird nicht supported")
     }
@@ -70,6 +74,37 @@ class Templates @Inject() (
   def get_html_header (header : String, title : String) : String = {
     return(scalate.render("mustache/header/" + header + ".mustache", Map{"title" -> title; "NEXT_BODY" -> ""}).toString)
   }
+  
+  def build_navigation_top_full (template : Template) : String = {
+    var navigation = ""
+    val head = scalate.render("mustache/header/header_single.mustache", template.toTemplateString).toString
+        template.navigationData match {
+          case Some(nav) => navigation = build_navigation_content(nav)
+          case None => throw new invalidNavigationException("no Navigation set")
+        }
+        val body = scalate.render("mustache/navigate/navigate_top.mustache", Map(
+          "navbarContent" -> navigation,
+          "hostURL" -> "http//0.0.0.0:4000")).toString
+        return(scalate.render("mustache/main_full.mustache", Map("HEAD" -> head,
+                                                    "BODY" -> body
+                                                         )).toString)
+      }
+
+  def build_navigation_top (template : Template) : String = {
+    var navigation = ""
+    val head = scalate.render("mustache/header/header_single.mustache", template.toTemplateString).toString
+        template.navigationData match {
+          case Some(nav) => navigation = build_navigation_content(nav)
+          case None => throw new invalidNavigationException("no Navigation set")
+        }
+        val body = scalate.render("mustache/navigate/navigate_top.mustache", Map(
+          "navbarContent" -> navigation,
+          "hostURL" -> "http//0.0.0.0:4000")).toString
+        return(scalate.render("mustache/main.mustache", Map("HEAD" -> head,
+                                                    "BODY" -> body
+                                                         )).toString)
+      }
+
   def build_navigation_content (navigationData : Navigation) : String = {
     var navigation = ""
     navigationData.navigation_Entrys.foreach((nav: NavigationEntry) => { 
