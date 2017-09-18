@@ -86,7 +86,7 @@ class Templates @Inject() (
   }
   
   def build_header_single (template : Template) : String = {
-    val body = scalate.render("mustache/header/header_single.mustache", Map("title" -> template.templateData.title, "hostURL" -> "0.0.0.0:4000")).toString
+    val body = scalate.render("mustache/header/header_single.mustache", Map("title" -> template.templateData.title, "hostURL" -> "http://localhost:4000")).toString
     return(body)
   }
 
@@ -100,7 +100,7 @@ class Templates @Inject() (
         }
         val body = scalate.render("mustache/navigate/navigate_top.mustache", Map(
           "navbarContent" -> navigation,
-          "hostURL" -> "http//0.0.0.0:4000")).toString
+          "hostURL" -> "http//localhost:4000")).toString
         return(scalate.render("mustache/main_full.mustache", Map("HEAD" -> head,
                                                     "BODY" -> body
                                                          )).toString)
