@@ -13,6 +13,7 @@ GET   /javascriptRoutes         controllers.Application.javascriptRoutes
 #GET 	/images/:imageName				controllers.Templates.getImageUrl(imageName : String)
 #GET 	/css/:cssName  						controllers.Templates.getCssUrl(cssName : String)
 
+#POST /admin											controllers.Admin.uploadMustache()
 
 POST  /getTemplate 							controllers.Templates.getTemplate
 

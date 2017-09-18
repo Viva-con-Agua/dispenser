@@ -50,7 +50,7 @@ class Templates @Inject() (
     templateName match  {
       case "navigation_top_full" => {
         try {
-          Ok(build_navigation_top(template))
+          Ok(build_navigation_top_full(template))
         }catch{
           case ex: Exception => {
             BadRequest(ex.toString)
@@ -66,6 +66,16 @@ class Templates @Inject() (
           }
         }
       }
+      case "header" => {
+        try {
+          Ok(build_header_single(template))
+        }catch{
+          case ex: Exception => {
+            println(ex.toString)
+            BadRequest(ex.toString)
+          }
+        }
+      }
       case _ => BadRequest("Template wird nicht supported")
     }
   }
@@ -75,6 +85,12 @@ class Templates @Inject() (
     return(scalate.render("mustache/header/" + header + ".mustache", Map{"title" -> title; "NEXT_BODY" -> ""}).toString)
   }
   
+  def build_header_single (template : Template) : String = {
+    val body = scalate.render("mustache/header/header_single.mustache", Map("title" -> template.templateData.title, "hostURL" -> "0.0.0.0:4000")).toString
+    return(body)
+  }
+
+
   def build_navigation_top_full (template : Template) : String = {
     var navigation = ""
     val head = scalate.render("mustache/header/header_single.mustache", template.toTemplateString).toString
@@ -92,17 +108,13 @@ class Templates @Inject() (
 
   def build_navigation_top (template : Template) : String = {
     var navigation = ""
-    val head = scalate.render("mustache/header/header_single.mustache", template.toTemplateString).toString
         template.navigationData match {
           case Some(nav) => navigation = build_navigation_content(nav)
           case None => throw new invalidNavigationException("no Navigation set")
         }
-        val body = scalate.render("mustache/navigate/navigate_top.mustache", Map(
+        return(scalate.render("mustache/navigate/navigate_top.mustache", Map(
           "navbarContent" -> navigation,
-          "hostURL" -> "http//0.0.0.0:4000")).toString
-        return(scalate.render("mustache/main.mustache", Map("HEAD" -> head,
-                                                    "BODY" -> body
-                                                         )).toString)
+          "hostURL" -> "http//0.0.0.0:4000")).toString)
       }
 
   def build_navigation_content (navigationData : Navigation) : String = {

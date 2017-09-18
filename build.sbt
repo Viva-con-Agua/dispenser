@@ -6,9 +6,12 @@ version := "0.1.2"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(DockerPlugin)
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.11"
 
 routesGenerator := InjectedRoutesGenerator
+
+resolvers += "emueller-bintray" at "http://dl.bintray.com/emueller/maven"
+
 
 libraryDependencies ++= Seq(
   jdbc,
@@ -27,8 +30,8 @@ libraryDependencies ++= Seq(
   "org.scala-lang" % "scala-compiler" % scalaVersion.value,
 	"net.codingwell" %% "scala-guice" % "4.0.0",
 	"net.ceedubs" %% "ficus" % "1.1.2",
-	//"org.webjars" % "bootstrap" % "3.3.4",
-	"com.adrianhurt" %% "play-bootstrap" % "1.2-P25-B3"
+	"org.webjars" % "bootstrap" % "3.3.4",
+	"com.eclipsesource" %% "play-json-schema-validator" % "0.9.4"
 
 )
 //add mongoDB driver
