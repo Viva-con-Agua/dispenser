@@ -84,12 +84,19 @@ class Templates @Inject() (
   def get_html_header (header : String, title : String) : String = {
     return(scalate.render("mustache/header/" + header + ".mustache", Map{"title" -> title; "NEXT_BODY" -> ""}).toString)
   }
-  
+ /**create a html header
+  *@param template Template
+  *@return html_header String
+  */
   def build_header_single (template : Template) : String = {
     val body = scalate.render("mustache/header/header_single.mustache", Map("title" -> template.templateData.title, "hostURL" -> "http://localhost:4000")).toString
     return(body)
   }
-
+  /** create a navigation with full header
+   *  navigationData need to be set, else return a BadRequestd
+   *  @param template Template
+   *  @return html_page String
+   */
 
   def build_navigation_top_full (template : Template) : String = {
     var navigation = ""
@@ -105,7 +112,11 @@ class Templates @Inject() (
                                                     "BODY" -> body
                                                          )).toString)
       }
-
+  /** create a navigation for the top of a page
+   *  navigationData need to be set, else return BadRequest
+   *  @param template Template
+   *  @return html_navigation String
+   */
   def build_navigation_top (template : Template) : String = {
     var navigation = ""
         template.navigationData match {
@@ -115,8 +126,11 @@ class Templates @Inject() (
         return(scalate.render("mustache/navigate/navigate_top.mustache", Map(
           "navbarContent" -> navigation,
           "hostURL" -> "http//0.0.0.0:4000")).toString)
-      }
-
+  }
+  /**create a navigation content over the navigationData entrys
+   * @param navigationData Navigation
+   * @return navigation_Entrys String sorted by default sequence
+   */
   def build_navigation_content (navigationData : Navigation) : String = {
     var navigation = ""
     navigationData.navigation_Entrys.foreach((nav: NavigationEntry) => { 
