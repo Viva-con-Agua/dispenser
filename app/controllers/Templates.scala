@@ -80,7 +80,8 @@ class Templates @Inject() (
     }
   }
 
-  
+
+
   def get_html_header (header : String, title : String) : String = {
     return(scalate.render("mustache/header/" + header + ".mustache", Map{"title" -> title; "NEXT_BODY" -> ""}).toString)
   }

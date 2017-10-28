@@ -23,6 +23,6 @@ POST  /getTemplate 							controllers.Templates.getTemplate
 
 GET   /assets/*file 						controllers.Assets.versioned(path="/public", file : Asset)
 GET   /images/*imageName        controllers.Assets.at(path="/public/images", imageName)
-GET   /javascript/*jsName       controllers.Assets.at(path="/public/javascript", jsName)
+GET   /javascripts/*jsName       controllers.Assets.at(path="/public/javascripts", jsName)
 GET 	/css/*cssName 						controllers.Assets.at(path="/public/stylesheets", cssName)
 GET   /webjars/*file            controllers.WebJarAssets.at(file)

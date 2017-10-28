@@ -2,15 +2,17 @@ var webpack = require('webpack');
 var path = require('path');
 
 var BUILD_DIR = path.resolve(__dirname, 'public/javascripts/');
-var APP_DIR = path.resolve(__dirname, 'app/views/admin/');
+var APP_DIR = path.resolve(__dirname, 'app/views/dispenser/');
 
 var config = {
   entry: {
-		javascript: APP_DIR + '/admin-workspace.jsx',
+		javascript: APP_DIR + '/dispenser.js',
 	},
   output: {
     path: BUILD_DIR,
-    filename: 'admin.js'
+    filename: 'dispenser.js',
+		libraryTarget: 'var',
+    library: 'EntryPoint'
   },
 	module: {
     rules : [
