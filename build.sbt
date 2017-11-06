@@ -2,7 +2,7 @@ import com.typesafe.sbt.packager.docker.Cmd
 
 name := """dispenser"""
 
-version := "0.1.13-beta"
+version := "0.1.13"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(DockerPlugin)
 
@@ -23,14 +23,11 @@ libraryDependencies ++= Seq(
 //  "org.reactivemongo" %% "reactivemongo" % "0.12.1",
   "org.reactivemongo" %% "reactivemongo-play-json" % "0.11.14",
   "org.reactivemongo" %% "play2-reactivemongo" % "0.11.14",
-  "org.webjars" %% "webjars-play" % "2.4.0-1",
-  "org.webjars" % "react" % "0.13.3",
   "com.github.tototoshi" %% "play-scalate" % "0.3.0",
   "org.scalatra.scalate" %% "scalate-core" % "1.7.1",
   "org.scala-lang" % "scala-compiler" % scalaVersion.value,
 	"net.codingwell" %% "scala-guice" % "4.0.0",
 	"net.ceedubs" %% "ficus" % "1.1.2",
-	"org.webjars" % "bootstrap" % "3.3.4",
 	"com.eclipsesource" %% "play-json-schema-validator" % "0.9.4"
 
 )

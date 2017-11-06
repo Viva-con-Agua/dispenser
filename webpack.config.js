@@ -11,8 +11,8 @@ var config = {
   output: {
     path: BUILD_DIR,
     filename: 'dispenser.js',
-		libraryTarget: 'var',
-    library: 'EntryPoint'
+    libraryTarget: 'var',
+    library: 'Dispenser'
   },
 	module: {
     rules : [

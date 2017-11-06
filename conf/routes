@@ -25,4 +25,3 @@ GET   /assets/*file 						controllers.Assets.versioned(path="/public", file : As
 GET   /images/*imageName        controllers.Assets.at(path="/public/images", imageName)
 GET   /javascripts/*jsName       controllers.Assets.at(path="/public/javascripts", jsName)
 GET 	/css/*cssName 						controllers.Assets.at(path="/public/stylesheets", cssName)
-GET   /webjars/*file            controllers.WebJarAssets.at(file)
