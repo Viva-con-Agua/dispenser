@@ -1,55 +1,34 @@
-import com.typesafe.sbt.packager.docker.Cmd
-
 name := """dispenser"""
+organization := "com.example"
 
-version := "0.1.13"
+version := "0.1.13-develop"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(DockerPlugin)
+lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.11.11"
 
-routesGenerator := InjectedRoutesGenerator
-
-resolvers += "emueller-bintray" at "http://dl.bintray.com/emueller/maven"
+libraryDependencies += guice
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
 
 
 libraryDependencies ++= Seq(
-  jdbc,
-  cache,
-  ws,
-	"com.typesafe.play" %% "play-mailer" % "3.0.1",
-  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
-  "com.nulab-inc" %% "play2-oauth2-provider" % "1.2.0",
-//  "org.reactivemongo" %% "reactivemongo" % "0.12.1",
-  "org.reactivemongo" %% "reactivemongo-play-json" % "0.11.14",
-  "org.reactivemongo" %% "play2-reactivemongo" % "0.11.14",
-  "com.github.tototoshi" %% "play-scalate" % "0.3.0",
-  "org.scalatra.scalate" %% "scalate-core" % "1.7.1",
-  "org.scala-lang" % "scala-compiler" % scalaVersion.value,
-	"net.codingwell" %% "scala-guice" % "4.0.0",
-	"net.ceedubs" %% "ficus" % "1.1.2",
-	"com.eclipsesource" %% "play-json-schema-validator" % "0.9.4"
-
+  "org.reactivemongo" %% "play2-reactivemongo" % "0.12.6-play26",
+	"com.github.tototoshi" %% "play-scalate" % "0.3.0",
+  "org.scalatra.scalate" %% "scalate-core" % "1.7.0",
+  "org.scala-lang" % "scala-compiler" % scalaVersion.value
 )
-//add mongoDB driver
-//libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.0.0"
-
-//includeFilter in (Assets, LessKeys.less) := "vca.less" // | "bar.less"
-includeFilter in (Assets, LessKeys.less) := "*.less"
-excludeFilter in (Assets, LessKeys.less) := "_*.less"
-
-enablePlugins(play.sbt.PlayScala)
-//create docker and setup dockerfile
 
 unmanagedResourceDirectories in Compile += baseDirectory.value / "app" / "views"
 
-//scalaWs
-libraryDependencies ++= Seq(
-  ws
-)
 
+//Docker
 maintainer in Docker := "Dennis Kleber"
-
 dockerExposedPorts := Seq(9000, 9443)
-
 dockerRepository := Some("vivaconagua")
+routesGenerator := InjectedRoutesGenerator
+
+// Adds additional packages into Twirl
+//TwirlKeys.templateImports += "com.example.controllers._"
+
+// Adds additional packages into conf/routes
+// play.sbt.routes.RoutesKeys.routesImport += "com.example.binders._"
