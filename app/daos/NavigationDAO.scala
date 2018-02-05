@@ -8,6 +8,7 @@ import play.api.Logger
 import models._
 import models.JsonFormatsNavigation._
 import play.api.data.Form
+import play.api.libs.json._
 // Reactive Mongo imports
 import reactivemongo.api.Cursor
 
@@ -27,4 +28,16 @@ class NavigationDAO @Inject() (
         Logger.debug(s"Successfully inserted Navigation with : $lastError")
         navigation
       }
+
+    def find(name: String):Future[Option[Navigation]] = {
+      //val cursor: Future[Cursor[Navigation]] = collection.map {
+      //  _.find(Json.obj("name" -> name)).cursor[Navigation] 
+      //}
+      //val futureNavigationList: Future[Seq[Navigation]] = cursor.flatMap(_.collect[Seq](1))
+      //futureNavigationList
+      val cursor = collection.map(_.find(Json.obj("name" -> name)).one[Navigation])
+
+      cursor.flatMap(identity)
+        
   }
+}

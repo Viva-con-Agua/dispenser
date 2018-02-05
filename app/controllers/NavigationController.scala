@@ -6,10 +6,11 @@ import play.api._
 import play.api.mvc._
 import play.api.libs.json._
 
+
+import com.github.tototoshi.play2.scalate._
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
-import com.github.tototoshi.play2.scalate._
 import models.JsonFormatsNavigation._
 import daos._
 import models._
@@ -18,15 +19,29 @@ import utils._
 
 class NavigationController @Inject() (
   cc:ControllerComponents,
-  //render: RenderHtml,
+  scalate: Scalate,
   navigationDAO: NavigationDAO
 )extends AbstractController(cc) {
 
   def validateJson[A: Reads] = BodyParsers.parse.json.validate(_.validate[A].asEither.left.map(e => BadRequest(JsError.toJson(e))))
   
-  def insert = Action.async(validateJson[Navigation]) { request =>
+  def insertNavigation = Action.async(validateJson[Navigation]) { request =>
     navigationDAO.insert(request.body)
     Future.successful(Ok)
+  }
+  
+ // def getNavigation = Action.async(name: String)
+
+  def build_navigation (navigationJson : Navigation) : String = {
+    var navigation: String = ""
+    navigationJson.entrys.foreach{ entry =>
+      navigation = navigation + build_navigation_entry(entry) + "\n"
+    }
+    scalate.render("mustache/navigate/navigate_top.mustache", Map{"navbarContent" -> navigation}).toString
+  }
+
+  def build_navigation_entry (entry : NavigationEntry) : String = {
+    scalate.render("mustache/navigate/navigate_entry.mustache", Map{"entryLable" -> entry.lable; "entryURL" -> entry.url}).toString
   }
 }
     

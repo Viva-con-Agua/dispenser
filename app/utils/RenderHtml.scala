@@ -1,7 +1,7 @@
 package utils
 
 import models._
-import javax.inject.{Inject}
+import javax.inject.Inject
 import com.github.tototoshi.play2.scalate._
 
 class RenderHtml @Inject() (
