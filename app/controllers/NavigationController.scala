@@ -30,7 +30,12 @@ class NavigationController @Inject() (
     Future.successful(Ok)
   }
   
- // def getNavigation = Action.async(name: String)
+  def getNavigation(name: String) = Action.async { request =>
+    navigationDAO.find(name).map{
+      case Some(a) => Ok(build_navigation(a))
+      case None => BadRequest("Navigation " + name + " not found")
+    }
+  }
 
   def build_navigation (navigationJson : Navigation) : String = {
     var navigation: String = ""

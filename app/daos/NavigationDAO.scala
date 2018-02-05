@@ -36,7 +36,6 @@ class NavigationDAO @Inject() (
       //val futureNavigationList: Future[Seq[Navigation]] = cursor.flatMap(_.collect[Seq](1))
       //futureNavigationList
       val cursor = collection.map(_.find(Json.obj("name" -> name)).one[Navigation])
-
       cursor.flatMap(identity)
         
   }

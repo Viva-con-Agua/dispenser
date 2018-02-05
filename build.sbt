@@ -5,7 +5,7 @@ version := "0.1.13-develop"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.11.11"
+scalaVersion := "2.12.4"
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
@@ -13,8 +13,8 @@ libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2
 
 libraryDependencies ++= Seq(
   "org.reactivemongo" %% "play2-reactivemongo" % "0.12.6-play26",
-	"com.github.tototoshi" %% "play-scalate" % "0.3.0",
-  "org.scalatra.scalate" %% "scalate-core" % "1.7.0",
+	//"com.github.tototoshi" %% "play-scalate" % "0.3.0",
+  "org.scalatra.scalate" %% "scalate-core" % "1.8.0",
   "org.scala-lang" % "scala-compiler" % scalaVersion.value
 )
 
