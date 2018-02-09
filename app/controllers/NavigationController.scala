@@ -20,35 +20,30 @@ import utils._
 class NavigationController @Inject() (
   cc:ControllerComponents,
   scalate: Scalate,
-  navigationDAO: NavigationDAO
+  navigationDAO: NavigationDAO,
+  render: RenderHtml
 )extends AbstractController(cc) {
 
   def validateJson[A: Reads] = BodyParsers.parse.json.validate(_.validate[A].asEither.left.map(e => BadRequest(JsError.toJson(e))))
-  
+ 
+  def index = Action.async { implicit request =>
+    Future.successful(Ok(views.html.navigation.index()))
+  }
+
   def insertNavigation = Action.async(validateJson[Navigation]) { request =>
     navigationDAO.insert(request.body)
     Future.successful(Ok)
   }
   
+  
   def getNavigation(name: String) = Action.async { request =>
     navigationDAO.find(name).map{
-      case Some(a) => Ok(build_navigation(a))
+      case Some(a) => Ok(render.build_navigation(a))
       case None => BadRequest("Navigation " + name + " not found")
     }
   }
-
-  def build_navigation (navigationJson : Navigation) : String = {
-    var navigation: String = ""
-    navigationJson.entrys.foreach{ entry =>
-      navigation = navigation + build_navigation_entry(entry) + "\n"
-    }
-    scalate.render("mustache/navigate/navigate_top.mustache", Map{"navbarContent" -> navigation}).toString
-  }
-
-  def build_navigation_entry (entry : NavigationEntry) : String = {
-    scalate.render("mustache/navigate/navigate_entry.mustache", Map{"entryLable" -> entry.lable; "entryURL" -> entry.url}).toString
-  }
 }
+
     
 
     

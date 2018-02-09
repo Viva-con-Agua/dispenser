@@ -15,7 +15,8 @@ case class NavigationEntry(
 
 case class Navigation (
   name: String,
-  entrys: List[NavigationEntry]
+  entrys: List[Option[NavigationEntry]]
+
 )
 
 object JsonFormatsNavigation {

@@ -2,15 +2,15 @@ var webpack = require('webpack');
 var path = require('path');
 
 var BUILD_DIR = path.resolve(__dirname, 'public/javascripts/');
-var APP_DIR = path.resolve(__dirname, 'app/views/dispenser/');
+var APP_DIR = path.resolve(__dirname, 'app/views/navigation/');
 
 var config = {
   entry: {
-		javascript: APP_DIR + '/dispenser.js',
+		javascript: APP_DIR + '/navigation-workspace.jsx',
 	},
   output: {
     path: BUILD_DIR,
-    filename: 'dispenser.js',
+    filename: 'navigation.js',
     libraryTarget: 'var',
     library: 'Dispenser'
   },
