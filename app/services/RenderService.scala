@@ -12,8 +12,8 @@ class RenderService @Inject() (
 ) {
   val hostURL = config.get[String]("dispenser.hostURL")
 
-  def buildSimpleHtml (navigation: Navigation, templateData: TemplateData): String = {
-    val navbarContent:String = build_navigation(navigation)
+  def buildSimpleHtml (navigation: Navigation, templateData: TemplateData, active: String): String = {
+    val navbarContent:String = build_navigation(navigation, active)
 
     scalate.render("mustache/simple/main.mustache", Map(
       "title" -> templateData.title,
@@ -24,14 +24,26 @@ class RenderService @Inject() (
   }
 
   
-  def build_navigation (navigationJson : Navigation) : String = {
+  def build_navigation (navigationJson : Navigation, active: String) : String = {
     var navigation: String = ""
     navigationJson.entrys.foreach{ entry =>
-      navigation = navigation + build_navigation_entry(entry) + "\n"
+      if (active == entry.lable) {
+        navigation = navigation + build_navigation_entry_active(entry) + "\n"
+      }else{
+        navigation = navigation + build_navigation_entry(entry) + "\n"
+      }
     }
     navigation
   }
+  
+  def build_navigation_entry_active (entry : NavigationEntry) : String = {
+    scalate.render("mustache/navigate/navigate_entry_active.mustache", Map(
+      "entryLable" -> entry.lable, 
+      "entryURL" -> entry.url
+    )).toString
+  }
 
+  
   def build_navigation_entry (entry : NavigationEntry) : String = {
     scalate.render("mustache/navigate/navigate_entry.mustache", Map(
       "entryLable" -> entry.lable, 
