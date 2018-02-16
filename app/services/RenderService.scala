@@ -15,12 +15,12 @@ class RenderService @Inject() (
   def buildSimpleHtml (navigation: Navigation, templateData: TemplateData): String = {
     val navbarContent:String = build_navigation(navigation)
 
-    scalate.render("mustache/simple/main.mustache", Map{
-      "title" -> templateData.title;
-      "hostURL" -> hostURL;
-      "navbarContent" -> navbarContent;
+    scalate.render("mustache/simple/main.mustache", Map(
+      "title" -> templateData.title,
+      "hostURL" -> hostURL,
+      "navbarContent" -> navbarContent,
       "content" -> new String(java.util.Base64.getDecoder.decode(templateData.content), "UTF-8")
-    }).toString
+    )).toString
   }
 
   
@@ -29,23 +29,21 @@ class RenderService @Inject() (
     navigationJson.entrys.foreach{ entry =>
       navigation = navigation + build_navigation_entry(entry) + "\n"
     }
-    scalate.render("mustache/navigate/navigate_top.mustache", Map{
-      "navbarContent" -> navigation
-    }).toString
+    navigation
   }
 
   def build_navigation_entry (entry : NavigationEntry) : String = {
-    scalate.render("mustache/navigate/navigate_entry.mustache", Map{
-      "entryLable" -> entry.lable; 
+    scalate.render("mustache/navigate/navigate_entry.mustache", Map(
+      "entryLable" -> entry.lable, 
       "entryURL" -> entry.url
-    }).toString
+    )).toString
   }
   
   def get_html_header (header : String, title : String) : String = {
-    scalate.render("mustache/header/" + header + ".mustache", Map{
-      "title" -> title; 
+    scalate.render("mustache/header/" + header + ".mustache", Map(
+      "title" -> title, 
       "NEXT_BODY" -> ""
-    }).toString
+      )).toString
   }
  /**create a html header
   *@param template Template
