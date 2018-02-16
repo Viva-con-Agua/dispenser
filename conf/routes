@@ -7,6 +7,9 @@
 
 GET 		/navigation/index    				controllers.NavigationController.index
 
+#Template 
+POST /template/simple		            controllers.TemplateController.getSimpleTemplate
+
 #Navigation
 
 POST /navigation/insert    					controllers.NavigationController.insertNavigation

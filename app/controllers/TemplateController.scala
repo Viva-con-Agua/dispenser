@@ -16,7 +16,7 @@ import daos._
 import services.RenderService
 
 
-class Templates @Inject() (
+class TemplateController @Inject() (
   cc: ControllerComponents,
   render: RenderService,
   navigationDAO: NavigationDAO

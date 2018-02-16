@@ -1,7 +1,7 @@
 name := """dispenser"""
 organization := "com.example"
 
-version := "0.1.13-develop"
+version := "0.1.3-dev"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
