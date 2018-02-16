@@ -8,7 +8,8 @@ import com.github.tototoshi.play2.scalate._
 
 class RenderService @Inject() (
   config: Configuration,
-  scalate: Scalate
+  scalate: Scalate,
+  base64: Base64
 ) {
   val hostURL = config.get[String]("dispenser.hostUrl")
 
@@ -19,7 +20,7 @@ class RenderService @Inject() (
       "title" -> templateData.title;
       "hostURL" -> hostURL;
       "navbarContent" -> navbarContent;
-      "content" -> templateData.content
+      "content" -> new String(java.util.Base64.getDecoder.decode(templateData.content), "UTF-8")
     }).toString
   }
 
