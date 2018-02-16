@@ -14,14 +14,14 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import models.JsonFormatsNavigation._
 import daos._
 import models._
-import utils._
+import services.RenderService
 
 
 class NavigationController @Inject() (
   cc:ControllerComponents,
   scalate: Scalate,
   navigationDAO: NavigationDAO,
-  render: RenderHtml
+  render: RenderService
 )extends AbstractController(cc) {
 
   def validateJson[A: Reads] = BodyParsers.parse.json.validate(_.validate[A].asEither.left.map(e => BadRequest(JsError.toJson(e))))

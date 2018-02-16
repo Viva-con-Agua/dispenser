@@ -1,5 +1,6 @@
 package models
 
+import java.util.UUID
 
 case class MetaData (
   msName: String,
@@ -8,12 +9,17 @@ case class MetaData (
 )
 case class TemplateData (
   title: String,
-  header: String,
-  body: String
+  content: String
+)
+
+case class NavigationData (
+  navigationName: String,
+  user_id: Option[UUID]
 )
 
 case class Template (
   metaData: MetaData,
+  navigationData: NavigationData,
   templateData: TemplateData
 )
 
@@ -22,6 +28,7 @@ object JsonFormatsTemplate {
 
   implicit val metaDataFormat = Json.format[MetaData]
   implicit val templateDataFormat = Json.format[TemplateData]
+  implicit val navigationDataFormat = Json.format[NavigationData]
   implicit val templateFormat = Json.format[Template]
 }
 

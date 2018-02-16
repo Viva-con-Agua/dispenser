@@ -12,16 +12,26 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import com.github.tototoshi.play2.scalate._
 import models.JsonFormatsTemplate._
 import models._
-import utils._
+import daos._
+import services.RenderService
 
 
 class Templates @Inject() (
   cc: ControllerComponents,
-  render: RenderHtml
+  render: RenderService,
+  navigationDAO: NavigationDAO
 )extends AbstractController(cc) {
   
   def validateJson[A: Reads] = BodyParsers.parse.json.validate(_.validate[A].asEither.left.map(e => BadRequest(JsError.toJson(e))))
 
+  def getSimpleTemplate = Action.async(validateJson[Template]) { request =>
+    val template = request.body
+    navigationDAO.find(template.navigationData.navigationName).flatMap {
+      case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(navigation, template.templateData)))
+      case _ => Future.successful(BadRequest("Navigation not found"))
+    }
+  }
+        
 
   def getTemplate = Action.async(validateJson[Template]) { request =>
     val template = request.body

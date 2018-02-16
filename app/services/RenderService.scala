@@ -1,14 +1,29 @@
-package utils
+package services
 
+import java.util.Base64
 import models._
+import play.api.Configuration
 import javax.inject.Inject
 import com.github.tototoshi.play2.scalate._
 
-class RenderHtml @Inject() (
+class RenderService @Inject() (
   config: Configuration,
   scalate: Scalate
 ) {
+  val hostURL = config.get[String]("dispenser.hostUrl")
 
+  def buildSimpleHtml (navigation: Navigation, templateData: TemplateData): String = {
+    val navbarContent:String = build_navigation(navigation)
+
+    scalate.render("mustache/simple/main.mustache", Map{
+      "title" -> templateData.title;
+      "hostURL" -> hostURL;
+      "navbarContent" -> navbarContent;
+      "content" -> templateData.content
+    }).toString
+  }
+
+  
   def build_navigation (navigationJson : Navigation) : String = {
     var navigation: String = ""
     navigationJson.entrys.foreach{ entry =>
@@ -40,7 +55,7 @@ class RenderHtml @Inject() (
   def build_header_single (template : Template) : String = {
     scalate.render("mustache/header/header_single.mustache", Map(
       "title" -> template.templateData.title, 
-      "hostURL" -> config.dispenser.hostURL)
+      "hostURL" -> hostURL)
     ).toString
   }
 }

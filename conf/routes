@@ -4,13 +4,8 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
 
 GET 		/navigation/index    				controllers.NavigationController.index
-
-
-
-POST /user/save											controllers.HomeController.createUser
 
 #Navigation
 

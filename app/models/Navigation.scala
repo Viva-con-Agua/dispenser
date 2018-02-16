@@ -15,7 +15,7 @@ case class NavigationEntry(
 
 case class Navigation (
   name: String,
-  entrys: List[Option[NavigationEntry]]
+  entrys: List[NavigationEntry]
 
 )
 
