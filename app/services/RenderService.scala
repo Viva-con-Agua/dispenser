@@ -8,10 +8,9 @@ import com.github.tototoshi.play2.scalate._
 
 class RenderService @Inject() (
   config: Configuration,
-  scalate: Scalate,
-  base64: Base64
+  scalate: Scalate
 ) {
-  val hostURL = config.get[String]("dispenser.hostUrl")
+  val hostURL = config.get[String]("dispenser.hostURL")
 
   def buildSimpleHtml (navigation: Navigation, templateData: TemplateData): String = {
     val navbarContent:String = build_navigation(navigation)
