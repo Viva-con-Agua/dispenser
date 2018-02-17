@@ -33,7 +33,8 @@ class RenderService @Inject() (
         navigation = navigation + build_navigation_entry(entry) + "\n"
       }
     }
-    navigation
+    scalate.render("mustache/navigate/navigate_content.mustache", Map(
+      "navbarEntrys" -> navigation)).toString
   }
   
   def build_navigation_entry_active (entry : NavigationEntry) : String = {

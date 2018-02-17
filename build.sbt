@@ -3,7 +3,7 @@ organization := "com.example"
 
 version := "0.1.3-dev"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(SbtWeb)
 
 scalaVersion := "2.12.4"
 
@@ -21,11 +21,18 @@ libraryDependencies ++= Seq(
 unmanagedResourceDirectories in Compile += baseDirectory.value / "app" / "views"
 
 
+includeFilter in (Assets, LessKeys.less) := "*.less"
+excludeFilter in (Assets, LessKeys.less) := "_*.less"
+
+
+
 //Docker
 maintainer in Docker := "Dennis Kleber"
 dockerExposedPorts := Seq(9000, 9443)
 dockerRepository := Some("vivaconagua")
 routesGenerator := InjectedRoutesGenerator
+
+
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.example.controllers._"
