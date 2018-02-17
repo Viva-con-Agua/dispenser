@@ -1,18 +1,23 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
+# An example controller showing a sample home page
 
-GET   /              						controllers.Application.index
+GET 		/navigation/index    				controllers.NavigationController.index
 
-GET   /admin 										controllers.Admin.index
+#Template 
+POST /template/simple		            controllers.TemplateController.getSimpleTemplate
 
-GET   /messages                 controllers.Application.getMessages
-GET   /javascriptRoutes         controllers.Application.javascriptRoutes
+#Navigation
 
-POST   /getTemplate 						controllers.Templates.getTemplate
-POST   /navigation/root         controllers.Navigation.createNavigationRoot
-POST   /navigation/entry        controllers.Navigation.createNavigationEntry
+POST /navigation/insert    					controllers.NavigationController.insertNavigation
+POST /navigation/get/:name					controllers.NavigationController.getNavigation(name: String)
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
-
-GET   /assets/*file 						controllers.Assets.versioned(path="/public", file: Asset)
+GET  	/assets/*file  						controllers.Assets.versioned(path="/public", file: Asset)
+GET  	/javascript/*file 				controllers.Assets.at(path="/public/javascripts", file)
+GET   /images/*file 						controllers.Assets.at(path="/public/images", file)
+GET   /css/*file                controllers.Assets.at(path="/public/stylesheets", file)
