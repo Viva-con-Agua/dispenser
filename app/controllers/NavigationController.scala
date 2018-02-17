@@ -38,7 +38,7 @@ class NavigationController @Inject() (
   
   def getNavigation(name: String) = Action.async { request =>
     navigationDAO.find(name).map{
-      case Some(a) => Ok(render.build_navigation(a))
+      case Some(a) => Ok(render.build_navigation(a, ""))
       case None => BadRequest("Navigation " + name + " not found")
     }
   }

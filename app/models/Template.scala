@@ -14,6 +14,7 @@ case class TemplateData (
 
 case class NavigationData (
   navigationName: String,
+  active: String,
   user_id: Option[UUID]
 )
 

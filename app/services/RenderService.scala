@@ -10,42 +10,53 @@ class RenderService @Inject() (
   config: Configuration,
   scalate: Scalate
 ) {
-  val hostURL = config.get[String]("dispenser.hostUrl")
+  val hostURL = config.get[String]("dispenser.hostURL")
 
-  def buildSimpleHtml (navigation: Navigation, templateData: TemplateData): String = {
-    val navbarContent:String = build_navigation(navigation)
+  def buildSimpleHtml (navigation: Navigation, templateData: TemplateData, active: String): String = {
+    val navbarContent:String = build_navigation(navigation, active)
 
-    scalate.render("mustache/simple/main.mustache", Map{
-      "title" -> templateData.title;
-      "hostURL" -> hostURL;
-      "navbarContent" -> navbarContent;
-      "content" -> templateData.content
-    }).toString
+    scalate.render("mustache/simple/main.mustache", Map(
+      "title" -> templateData.title,
+      "hostURL" -> hostURL,
+      "navbarContent" -> navbarContent,
+      "content" -> new String(java.util.Base64.getDecoder.decode(templateData.content), "UTF-8")
+    )).toString
   }
 
   
-  def build_navigation (navigationJson : Navigation) : String = {
+  def build_navigation (navigationJson : Navigation, active: String) : String = {
     var navigation: String = ""
     navigationJson.entrys.foreach{ entry =>
-      navigation = navigation + build_navigation_entry(entry) + "\n"
+      if (active == entry.lable) {
+        navigation = navigation + build_navigation_entry_active(entry) + "\n"
+      }else{
+        navigation = navigation + build_navigation_entry(entry) + "\n"
+      }
     }
-    scalate.render("mustache/navigate/navigate_top.mustache", Map{
-      "navbarContent" -> navigation
-    }).toString
+    scalate.render("mustache/navigate/navigate_content.mustache", Map(
+      "navbarEntrys" -> navigation)).toString
+  }
+  
+  def build_navigation_entry_active (entry : NavigationEntry) : String = {
+    scalate.render("mustache/navigate/navigate_entry_active.mustache", Map(
+      "entryLable" -> entry.lable, 
+      "entryURL" -> entry.url
+    )).toString
   }
 
+  
   def build_navigation_entry (entry : NavigationEntry) : String = {
-    scalate.render("mustache/navigate/navigate_entry.mustache", Map{
-      "entryLable" -> entry.lable; 
+    scalate.render("mustache/navigate/navigate_entry.mustache", Map(
+      "entryLable" -> entry.lable, 
       "entryURL" -> entry.url
-    }).toString
+    )).toString
   }
   
   def get_html_header (header : String, title : String) : String = {
-    scalate.render("mustache/header/" + header + ".mustache", Map{
-      "title" -> title; 
+    scalate.render("mustache/header/" + header + ".mustache", Map(
+      "title" -> title, 
       "NEXT_BODY" -> ""
-    }).toString
+      )).toString
   }
  /**create a html header
   *@param template Template
