@@ -11,6 +11,7 @@ class RenderService @Inject() (
   scalate: Scalate
 ) {
   val hostURL = config.get[String]("dispenser.hostURL")
+  val indexURL = config.get[String]("dispenser.indexURL")
 
   def buildSimpleHtml (navigation: Navigation, templateData: TemplateData, active: String): String = {
     val navbarContent:String = build_navigation(navigation, active)
