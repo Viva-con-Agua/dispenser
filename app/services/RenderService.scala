@@ -23,8 +23,17 @@ class RenderService @Inject() (
       "content" -> new String(java.util.Base64.getDecoder.decode(templateData.content), "UTF-8")
     )).toString
   }
-
   
+  def buildErrorHtml(templateData: TemplateData): String = {
+    val navbarContent: String = scalate.render("mustache/navigate/navigate_error.mustache").toString
+    scalate.render("mustache/simple/main.mustache", Map(
+      "title" -> templateData.title,
+      "hostURL" -> hostURL,
+      "navbarContent" -> navbarContent,
+      "content" -> new String(java.util.Base64.getDecoder.decode(templateData.content), "UTF-8")
+    )).toString
+  }
+
   def build_navigation (navigationJson : Navigation, active: String) : String = {
     var navigation: String = ""
     navigationJson.entrys.foreach{ entry =>

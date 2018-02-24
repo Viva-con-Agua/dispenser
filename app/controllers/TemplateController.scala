@@ -31,7 +31,11 @@ class TemplateController @Inject() (
       case _ => Future.successful(BadRequest("Navigation not found"))
     }
   }
-        
+  
+  def getErrorTemplate = Action.async(validateJson[TemplateData]) { request =>
+    val templateData = request.body
+    Future.successful(Ok(render.buildErrorHtml(templateData)))
+  }
 
   def getTemplate = Action.async(validateJson[Template]) { request =>
     val template = request.body
