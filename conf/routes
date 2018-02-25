@@ -9,6 +9,7 @@ GET 		/navigation/index    				controllers.NavigationController.index
 
 #Template 
 POST /template/simple		            controllers.TemplateController.getSimpleTemplate
+POST /template/error								controllers.TemplateController.getErrorTemplate
 
 #Navigation
 
