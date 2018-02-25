@@ -16,31 +16,24 @@ Dispenser can render HTML-Files with custom Context. For this you can simply sen
 ```json
 {
 	metaData: {
-		microServiceName: "",
-		template: "",
-		searchEngineKeywords: [""],
-		language: [""],
-		organization: ""
+		msName: "",
+		templateName: "",
+		language: Option[""]
+	},
+	navigationData:{
+		navigationName: "",
+		active:"",
+		user_id: Option UUID
 	},
 	templateData: {
 		title: "",
-		header:"", 
-		body: ""
-	},
-	navigationData: {
-		navigation_Name: "",
-		navigation_Entrys: [
-			{entry_Lable: "",
-			 entry_URL: ""
-			},
-			....
-		]
+		content:""
 	}
 }
 ```
 
 
-to Dispenser @  https://vca.informatik.hu-berlin.de/api/dispenser/getTemplate
+to Dispenser @ http://HOST/dispenser/template/simple
 
   
 TEMPLATE-FILES
@@ -56,7 +49,8 @@ simpleTemplate: header, body:
 ChangeLog
 =========
 
-## Version 0.1.2 (2017-09-14)
-
+## Version 0.2.3 (2018-02-25)
+* [[F] #1 -Embeds HTML-Snippets in an HTML-Form](https://github.com/Viva-con-Agua/dispenser/issues/1)
+* [[F] #9 -  add mongoDB for navigation](https://github.com/Viva-con-Agua/dispenser/issues/9)
 * [[F] #12 - view representation for navigation](https://github.com/Viva-con-Agua/dispenser/issues/12)
-*	[[F] #3 - handle HTML Template](https://github.com/Viva-con-Agua/dispenser/issues/3)
+* [[F] #3 - handle HTML Template](https://github.com/Viva-con-Agua/dispenser/issues/3)
