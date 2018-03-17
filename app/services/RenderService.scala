@@ -10,7 +10,9 @@ class RenderService @Inject() (
   config: Configuration,
   scalate: Scalate
 ) {
-  val hostURL = config.get[String]("dispenser.hostURL")
+  val host = config.get[String]("dispenser.hostURL")
+  val context = config.get[String]("play.http.context")
+  val hostURL = host + context
   val indexURL = config.get[String]("dispenser.indexURL")
 
   def buildSimpleHtml (navigation: Navigation, templateData: TemplateData, active: String): String = {
@@ -48,17 +50,19 @@ class RenderService @Inject() (
   }
   
   def build_navigation_entry_active (entry : NavigationEntry) : String = {
+    val entryUrl = host + entry.url
     scalate.render("mustache/navigate/navigate_entry_active.mustache", Map(
       "entryLable" -> entry.lable, 
-      "entryURL" -> entry.url
+      "entryURL" -> entryUrl
     )).toString
   }
 
   
   def build_navigation_entry (entry : NavigationEntry) : String = {
+    val entryUrl = host + entry.url
     scalate.render("mustache/navigate/navigate_entry.mustache", Map(
       "entryLable" -> entry.lable, 
-      "entryURL" -> entry.url
+      "entryURL" -> entryUrl
     )).toString
   }
   

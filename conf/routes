@@ -13,6 +13,7 @@ POST /template/error								controllers.TemplateController.getErrorTemplate
 
 #Navigation
 
+GET   /navigation/init                                          controllers.NavigationController.init
 POST /navigation/insert    					controllers.NavigationController.insertNavigation
 POST /navigation/get/:name					controllers.NavigationController.getNavigation(name: String)
 # Map static resources from the /public folder to the /assets URL path
