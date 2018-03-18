@@ -34,11 +34,11 @@ class NavigationController @Inject() (
   
   def init = Action.async { implicit request =>
     getNavigationFromFile("noSignIn") match {
-      case s: JsSuccess[Navigation] => navigationDAO.insert(s.get)
+      case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
       case e: JsError => BadRequest(JsError.toJson(e).toString)
     }
     getNavigationFromFile("drops") match {
-      case s: JsSuccess[Navigation] => navigationDAO.insert(s.get)
+      case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
       case e: JsError => BadRequest(JsError.toJson(e).toString)
     } 
     Future.successful(Ok)
