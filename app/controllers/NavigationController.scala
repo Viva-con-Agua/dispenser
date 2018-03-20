@@ -23,7 +23,8 @@ class NavigationController @Inject() (
   scalate: Scalate,
   navigationDAO: NavigationDAO,
   config: Configuration,
-  render: RenderService
+  render: RenderService,
+  val env: Environment
 )extends AbstractController(cc) {
 
   def validateJson[A: Reads] = BodyParsers.parse.json.validate(_.validate[A].asEither.left.map(e => BadRequest(JsError.toJson(e))))
@@ -59,7 +60,7 @@ class NavigationController @Inject() (
 
   private def getNavigationFromFile(name: String): JsResult[Navigation] = {
     Logger.debug(Play.application.path.toString)
-    val source: String = Source.fromFile("navigation/json/" + name + ".json").getLines.mkString
+    val source: String = Source.fromFile(env.getFile("/conf/navigation/jsons/" + name + ".json")).getLines.mkString
     Json.parse(source).validate[Navigation]
   }
 }
