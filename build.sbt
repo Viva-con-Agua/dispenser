@@ -1,7 +1,8 @@
 name := """dispenser"""
 organization := "com.example"
 
-version := "0.2.3"
+version := Option(System.getProperty("version")).getOrElse("0.2.3")
+//version := "0.2.3"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(SbtWeb)
 

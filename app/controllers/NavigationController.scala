@@ -5,7 +5,7 @@ import javax.inject._
 import play.api._
 import play.api.mvc._
 import play.api.libs.json._
-
+import play.Play
 
 import com.github.tototoshi.play2.scalate._
 import scala.concurrent.Future
@@ -58,7 +58,8 @@ class NavigationController @Inject() (
   }
 
   private def getNavigationFromFile(name: String): JsResult[Navigation] = {
-    val source: String = Source.fromFile("app/assets/navigations/" + name + ".json").getLines.mkString
+    Logger.debug(Play.application.path.toString)
+    val source: String = Source.fromFile("navigation/json/" + name + ".json").getLines.mkString
     Json.parse(source).validate[Navigation]
   }
 }

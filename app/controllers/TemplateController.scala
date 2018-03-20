@@ -26,7 +26,7 @@ class TemplateController @Inject() (
 
   def getSimpleTemplate = Action.async(validateJson[Template]) { request =>
     val template = request.body
-    navigationDAO.findByPath(template.navigationData.active).flatMap {
+    navigationDAO.find(template.navigationData.navigationName).flatMap {
       case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(navigation, template.templateData, template.navigationData.active)))
       case _ => Future.successful(BadRequest("Navigation not found"))
     }
@@ -39,21 +39,10 @@ class TemplateController @Inject() (
 
   def getTemplate = Action.async(validateJson[Template]) { request =>
     val template = request.body
-    val templateName = template.metaData.templateName
-    templateName match  {
-      case "header" => {
-        try {
-          Future.successful(Ok(render.build_header_single(template)))
-        }catch{
-          case ex: Exception => {
-            println(ex.toString)
-            Future.successful(BadRequest(ex.toString))
-          }
-        }
-      }
-      case _ => Future.successful(BadRequest("Template wird nicht supported"))
+    navigationDAO.findByPath(template.navigationData.active).flatMap {
+      case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(navigation, template.templateData, template.navigationData.active)))
+      case _ => Future.successful(BadRequest("Navigation not found"))
     }
-
   }
 }
 
