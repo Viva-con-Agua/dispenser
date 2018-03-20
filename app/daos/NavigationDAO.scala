@@ -34,6 +34,11 @@ class NavigationDAO @Inject() (
       cursor.flatMap(identity)
     }
 
+    def findByPath(path: String):Future[Option[Navigation]] = {
+      val cursor = collection.map(_.find(Json.obj("entrys" -> {"$in" -> path })).one[Navigation])
+      cursor.flatMap(identity)
+    }
+
     def update(navigation: Navigation):Future[Navigation] = {
       find(navigation.name).map {
         case Some(a) => {

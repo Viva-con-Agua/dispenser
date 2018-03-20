@@ -39,7 +39,7 @@ class RenderService @Inject() (
   def build_navigation (navigationJson : Navigation, active: String) : String = {
     var navigation: String = ""
     navigationJson.entrys.foreach{ entry =>
-      if (active == entry.lable) {
+      if (active == entry.url) {
         navigation = navigation + build_navigation_entry_active(entry) + "\n"
       }else{
         navigation = navigation + build_navigation_entry(entry) + "\n"
