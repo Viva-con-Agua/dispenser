@@ -26,7 +26,7 @@ class TemplateController @Inject() (
 
   def getSimpleTemplate = Action.async(validateJson[Template]) { request =>
     val template = request.body
-    navigationDAO.find(template.navigationData.navigationName).flatMap {
+    navigationDAO.findByPath(template.navigationData.active).flatMap {
       case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(navigation, template.templateData, template.navigationData.active)))
       case _ => Future.successful(BadRequest("Navigation not found"))
     }
