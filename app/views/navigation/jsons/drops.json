@@ -1,0 +1,21 @@
+{
+	"name":"GlobalNav",
+	"entrys": [
+		{
+			"lable":"TaskOverView",
+			"url":"/drops/task"
+		},
+		{
+			"lable":"PROFILE",
+			"url":"/drops/profile"
+		},
+		{
+			"lable":"OAUTH-ClIENT",
+			"url":"/drops/oauth2/register"
+		},
+		{
+			"lable":"SIGN OUT",
+			"url":"/drops/auth/signout"
+		}
+	]		
+}

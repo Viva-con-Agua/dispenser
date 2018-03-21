@@ -1,0 +1,13 @@
+{
+	"name":"no-SignIn",
+	"entrys": [
+		{
+			"lable":"SIGN IN",
+			"url":"/drops/auth/signin"
+		},
+		{
+			"lable":"SIGN UP",
+			"url":"/drops/auth/signup"
+		}
+	]		
+}
