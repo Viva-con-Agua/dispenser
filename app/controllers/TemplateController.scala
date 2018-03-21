@@ -39,7 +39,7 @@ class TemplateController @Inject() (
 
   def getTemplate = Action.async(validateJson[Template]) { request =>
     val template = request.body
-    val path = "/" + template.navigationData.navigationName + template.navigationData.active
+    val path = template.navigationData.active
     Logger.debug(path)
     navigationDAO.findByPath(path).flatMap {
       case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(navigation, template.templateData, template.navigationData.active)))
