@@ -12,9 +12,9 @@ case class NavigationEntry(
   url: String,
   permission: Option[Permission]
   )
-
 case class Navigation (
   name: String,
+  involved: List[String],
   entrys: List[NavigationEntry]
 
 )

@@ -1,20 +1,31 @@
 {
 	"name":"GlobalNav",
+	"involved":[
+					"/drops",
+					"/drops/task",
+					"/drops/profile",
+					"/drops/oauth2/register",
+					"/drops/auth/signout"
+	],
 	"entrys": [
 		{
 			"lable":"TaskOverView",
+			"render":true,
 			"url":"/drops/task"
 		},
 		{
 			"lable":"PROFILE",
+			"render":true,
 			"url":"/drops/profile"
 		},
 		{
 			"lable":"OAUTH-ClIENT",
+			"render":true,
 			"url":"/drops/oauth2/register"
 		},
 		{
 			"lable":"SIGN OUT",
+			"render":true,
 			"url":"/drops/auth/signout"
 		}
 	]		
