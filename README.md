@@ -49,7 +49,8 @@ simpleTemplate: header, body:
 ChangeLog
 =========
 
-## Version 0.2.4 (2018-03-21)
+## Version 0.2.5 (2018-05-08)
+* [[F] #26 - Navigation not Found](https://github.com/Viva-con-Agua/dispenser/issues/26) 
 * [[F] #21 - add init for navigation](https://github.com/Viva-con-Agua/dispenser/issues/23) 
 * [[F] #1 -Embeds HTML-Snippets in an HTML-Form](https://github.com/Viva-con-Agua/dispenser/issues/1)
 * [[F] #9 -  add mongoDB for navigation](https://github.com/Viva-con-Agua/dispenser/issues/9)
