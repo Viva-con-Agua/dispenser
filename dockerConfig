@@ -1,0 +1,8 @@
+#!/bin/bash
+config=-Dplay.evolutions.db.default.autoApply=true \
+-Dplay.http.secret.key"ösjkadfhkjsadfaösjdfnisajdnfsöjkadfn" \
+-Dmongodb.uri=mongodb://mongo/dispenser \
+-Dconfig.resource=application.conf \
+-Ddispenser.hostURL="https://vca.informatik.hu-berlin.de/dispenser" \
+-Dplay.http.context="/dispenser";
+
