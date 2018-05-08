@@ -12,7 +12,11 @@ class RenderService @Inject() (
 ) {
   val host = config.get[String]("dispenser.hostURL")
   val context = config.get[String]("play.http.context")
-  val hostURL = host + context
+  val hostURL = if(context == "/"){
+    host 
+  }else{
+    host + context
+  }
   val indexURL = config.get[String]("dispenser.indexURL")
 
   def buildSimpleHtml (navigation: Navigation, templateData: TemplateData, active: String): String = {
