@@ -49,7 +49,8 @@ simpleTemplate: header, body:
 ChangeLog
 =========
 
-## Version 0.2.5 (2018-05-08)
+## Version 0.2.6 (2018-06-19)
+* [[F] #28 - Impressum: template logic for handling imprints](https://github.com/Viva-con-Agua/dispenser/issues/28)
 * [[F] #26 - Switch the host](https://github.com/Viva-con-Agua/dispenser/issues/26) 
 * [[F] #21 - add init for navigation](https://github.com/Viva-con-Agua/dispenser/issues/23) 
 * [[F] #1 -Embeds HTML-Snippets in an HTML-Form](https://github.com/Viva-con-Agua/dispenser/issues/1)
