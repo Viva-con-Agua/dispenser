@@ -18,6 +18,7 @@ class RenderService @Inject() (
     host + context
   }
   val indexURL = config.get[String]("dispenser.indexURL")
+  val imprintURL = config.get[String]("dispenser.imprintURL")
 
   def buildSimpleHtml (navigation: Navigation, templateData: TemplateData, active: String): String = {
     val navbarContent:String = build_navigation(navigation, active)
@@ -26,6 +27,7 @@ class RenderService @Inject() (
       "title" -> templateData.title,
       "hostURL" -> hostURL,
       "navbarContent" -> navbarContent,
+      "imprintURL" -> imprintURL,
       "content" -> new String(java.util.Base64.getDecoder.decode(templateData.content), "UTF-8")
     )).toString
   }
