@@ -27,7 +27,8 @@ Dispenser can render HTML-Files with custom Context. For this you can simply sen
 	},
 	templateData: {
 		title: "",
-		content:""
+		content:"",
+                head: Option String
 	}
 }
 ```
@@ -49,7 +50,9 @@ simpleTemplate: header, body:
 ChangeLog
 =========
 
-## Version 0.2.6 (2018-06-19)
+## Version 0.2.8 (2018-06-25)
+* [[B] #25-  Navigation not Found](https://github.com/Viva-con-Agua/dispenser/issues/25)
+* [[F] #31 - Templates: add option for handling javascript](https://github.com/Viva-con-Agua/dispenser/issues/31)
 * [[F] #28 - Impressum: template logic for handling imprints](https://github.com/Viva-con-Agua/dispenser/issues/28)
 * [[F] #26 - Switch the host](https://github.com/Viva-con-Agua/dispenser/issues/26) 
 * [[F] #21 - add init for navigation](https://github.com/Viva-con-Agua/dispenser/issues/23) 
