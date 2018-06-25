@@ -9,7 +9,8 @@ case class MetaData (
 )
 case class TemplateData (
   title: String,
-  content: String
+  content: String,
+  head: Option[String]
 )
 
 case class NavigationData (

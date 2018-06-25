@@ -22,11 +22,17 @@ class RenderService @Inject() (
 
   def buildSimpleHtml (navigation: Navigation, templateData: TemplateData, active: String): String = {
     val navbarContent:String = build_navigation(navigation, active)
-
+    val host = templateData.head match {
+      case Some(head) =>
+        new String(java.util.Base64.getDecoder.decode(head), "UTF-8")
+      case None =>
+        ""
+    }
     scalate.render("mustache/simple/main.mustache", Map(
       "title" -> templateData.title,
       "hostURL" -> hostURL,
       "navbarContent" -> navbarContent,
+      "host" -> host,
       "imprintURL" -> imprintURL,
       "content" -> new String(java.util.Base64.getDecoder.decode(templateData.content), "UTF-8")
     )).toString
