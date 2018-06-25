@@ -43,7 +43,12 @@ class TemplateController @Inject() (
     Logger.debug(path)
     navigationDAO.findByPath(path).flatMap {
       case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(navigation, template.templateData, template.navigationData.active)))
-      case _ => Future.successful(BadRequest("Navigation not found"))
+      case _ => 
+        navigationDAO.find("GlobalNav").flatMap {
+          case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(navigation, template.templateData, template.navigationData.active)))
+          case _ => Future.successful(BadRequest("Navigation not found"))
+        } 
+        
     }
   }
 }
