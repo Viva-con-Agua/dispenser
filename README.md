@@ -50,8 +50,9 @@ simpleTemplate: header, body:
 ChangeLog
 =========
 
-## Version 0.2.8 (2018-06-25)
-* [[B] #25-  Navigation not Found](https://github.com/Viva-con-Agua/dispenser/issues/25)
+## Version 0.3.8 (2018-07-10)
+* [[F] #35 - Widget for handling navigation via Javascript](https://github.com/Viva-con-Agua/dispenser/issues/35)
+* [[B] #25 - Navigation not Found](https://github.com/Viva-con-Agua/dispenser/issues/25)
 * [[F] #31 - Templates: add option for handling javascript](https://github.com/Viva-con-Agua/dispenser/issues/31)
 * [[F] #28 - Impressum: template logic for handling imprints](https://github.com/Viva-con-Agua/dispenser/issues/28)
 * [[F] #26 - Switch the host](https://github.com/Viva-con-Agua/dispenser/issues/26) 
