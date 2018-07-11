@@ -32,6 +32,10 @@ class TemplateController @Inject() (
     }
   }
   
+  def getTemplateWithNavigationWidget = Action.async(validateJson[Template]) { request =>
+    Future.successful(Ok(render.buildWithNavigationWidget(request.body.templateData)))
+  }
+
   def getErrorTemplate = Action.async(validateJson[TemplateData]) { request =>
     val templateData = request.body
     Future.successful(Ok(render.buildErrorHtml(templateData)))
