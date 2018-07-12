@@ -27,11 +27,15 @@ class TemplateController @Inject() (
   def getSimpleTemplate = Action.async(validateJson[Template]) { request =>
     val template = request.body
     navigationDAO.find(template.navigationData.navigationName).flatMap {
-      case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(navigation, template.templateData, template.navigationData.active)))
-      case _ => Future.successful(BadRequest("Navigation not found"))
+      case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(Option(navigation), template.templateData, template.navigationData.active)))
+      case _ => Future.successful(Ok(render.buildSimpleHtml(None, template.templateData, template.navigationData.active)))
     }
   }
   
+  def getTemplateWithNavigationWidget = Action.async(validateJson[Template]) { request =>
+    Future.successful(Ok(render.buildWithNavigationWidget(request.body.templateData)))
+  }
+
   def getErrorTemplate = Action.async(validateJson[TemplateData]) { request =>
     val templateData = request.body
     Future.successful(Ok(render.buildErrorHtml(templateData)))
@@ -42,13 +46,8 @@ class TemplateController @Inject() (
     val path = template.navigationData.active
     Logger.debug(path)
     navigationDAO.findByPath(path).flatMap {
-      case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(navigation, template.templateData, template.navigationData.active)))
-      case _ => 
-        navigationDAO.find("GlobalNav").flatMap {
-          case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(navigation, template.templateData, template.navigationData.active)))
-          case _ => Future.successful(BadRequest("Navigation not found"))
-        } 
-        
+      case Some(navigation) => Future.successful(Ok(render.buildSimpleHtml(Option(navigation), template.templateData, template.navigationData.active)))
+      case _ => Future.successful(Ok(render.buildSimpleHtml(None, template.templateData, template.navigationData.active)))
     }
   }
 }

@@ -5,22 +5,23 @@
 
 # An example controller showing a sample home page
 
-GET 		/navigation/index    				controllers.NavigationController.index
+#GET 		/navigation/index    				controllers.NavigationController.index
 
 #Template 
-POST /template/full                          controllers.TemplateController.getTemplate
-POST /template/simple		            controllers.TemplateController.getSimpleTemplate
+POST /template/full                 controllers.TemplateController.getTemplate
+POST /template/simple		            controllers.TemplateController.getSimpleTemplate 
 POST /template/error								controllers.TemplateController.getErrorTemplate
+GET  /template/main/widget          controllers.TemplateController.getTemplateWithNavigationWidget
 
 #Navigation
 
-GET   /navigation/init                                          controllers.NavigationController.init
+GET   /navigation/init              controllers.NavigationController.init
 POST /navigation/insert    					controllers.NavigationController.insertNavigation
-GET /navigation/get/:name					controllers.NavigationController.getNavigationAsJson(name: String)
+GET /navigation/get/:name					  controllers.NavigationController.getNavigationAsJson(name: String)
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
-GET  	/assets/*file  						controllers.Assets.versioned(path="/public", file: Asset)
-GET  	/javascript/*file 				controllers.Assets.at(path="/public/javascripts", file)
-GET   /images/*file 						controllers.Assets.at(path="/public/images", file)
-GET   /css/*file                controllers.Assets.at(path="/public/stylesheets", file)
+GET  	/assets/*file  						    controllers.Assets.versioned(path="/public", file: Asset)
+GET  	/javascript/*file 				    controllers.Assets.at(path="/public/javascripts", file)
+GET   /images/*file 						    controllers.Assets.at(path="/public/images", file)
+GET   /css/*file                    controllers.Assets.at(path="/public/stylesheets", file)

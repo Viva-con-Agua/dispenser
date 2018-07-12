@@ -29,9 +29,9 @@ class NavigationController @Inject() (
 
   def validateJson[A: Reads] = BodyParsers.parse.json.validate(_.validate[A].asEither.left.map(e => BadRequest(JsError.toJson(e))))
  
-  def index = Action.async { implicit request =>
-    Future.successful(Ok(views.html.navigation.index()))
-  }
+  //def index = Action.async { implicit request =>
+  //  Future.successful(Ok(views.html.navigation.index()))
+  //}
   
   def init = Action.async { implicit request =>
     getNavigationFromFile("noSignIn") match {

@@ -1,7 +1,7 @@
 name := """dispenser"""
 organization := "com.example"
 
-version := Option(System.getProperty("version")).getOrElse("0.2.8")
+version := Option(System.getProperty("version")).getOrElse("0.2.8-dev")
 //version := "0.2.3"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(SbtWeb)
@@ -20,6 +20,7 @@ libraryDependencies ++= Seq(
 )
 
 unmanagedResourceDirectories in Compile += baseDirectory.value / "app" / "views"
+unmanagedResourceDirectories in Compile += baseDirectory.value / "public"
 
 
 includeFilter in (Assets, LessKeys.less) := "*.less"
