@@ -20,6 +20,7 @@ libraryDependencies ++= Seq(
 )
 
 unmanagedResourceDirectories in Compile += baseDirectory.value / "app" / "views"
+unmanagedResourceDirectories in Compile += baseDirectory.value / "public"
 
 
 includeFilter in (Assets, LessKeys.less) := "*.less"
