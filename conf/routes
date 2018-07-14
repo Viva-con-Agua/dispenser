@@ -11,7 +11,7 @@
 POST /template/full                 controllers.TemplateController.getTemplate
 POST /template/simple		            controllers.TemplateController.getSimpleTemplate 
 POST /template/error								controllers.TemplateController.getErrorTemplate
-GET  /template/main/widget          controllers.TemplateController.getTemplateWithNavigationWidget
+POST  /template/main/widget          controllers.TemplateController.getTemplateWithNavigationWidget
 
 #Navigation
 

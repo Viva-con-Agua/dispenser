@@ -25,7 +25,7 @@ class RenderService @Inject() (
       case Some(nav) => build_navigation(nav, active)
       case None => "ERROR: navigation not found"
     }
-    val host = templateData.head match {
+    val head = templateData.head match {
       case Some(head) =>
         new String(java.util.Base64.getDecoder.decode(head), "UTF-8")
       case None =>
@@ -35,15 +35,22 @@ class RenderService @Inject() (
       "title" -> templateData.title,
       "hostURL" -> hostURL,
       "navbarContent" -> navbarContent,
-      "host" -> host,
+      "head" -> head,
       "imprintURL" -> imprintURL,
       "content" -> new String(java.util.Base64.getDecoder.decode(templateData.content), "UTF-8")
     )).toString
   }
   
   def buildWithNavigationWidget(templateData:TemplateData): String = {
+    val head = templateData.head match {
+      case Some(head) =>
+        new String(java.util.Base64.getDecoder.decode(head), "UTF-8")
+      case None =>
+        ""
+    }
     scalate.render("mustache/main/main_navigation_widget.mustache", Map(
       "title" -> templateData.title,
+      "head" -> head,
       "content" -> new String(java.util.Base64.getDecoder.decode(templateData.content), "UTF-8"),
       "footer" -> scalate.render("mustache/footer/footer.mustache", Map("imprintURL" -> imprintURL)).toString
       )).toString   
