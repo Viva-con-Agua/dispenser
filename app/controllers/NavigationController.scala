@@ -11,6 +11,12 @@ import com.github.tototoshi.play2.scalate._
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
+import com.mohiva.play.silhouette.api.Silhouette
+import org.vivaconagua.play2OauthClient.silhouette.CookieEnv
+import org.vivaconagua.play2OauthClient.silhouette.UserService
+
+import com.mohiva.play.silhouette.api.actions.SecuredErrorHandler
+
 import models.JsonFormatsNavigation._
 import daos._
 import models._
@@ -24,6 +30,7 @@ class NavigationController @Inject() (
   navigationDAO: NavigationDAO,
   config: Configuration,
   render: RenderService,
+  silhouette: Silhouette[CookieEnv],
   val env: Environment
 )extends AbstractController(cc) {
 
@@ -56,6 +63,26 @@ class NavigationController @Inject() (
       case _ => BadRequest("Navigation" + name + " not found")
     }
   }
+  
+  val defaultHandler = new SecuredErrorHandler {
+    override def onNotAuthenticated(implicit request: RequestHeader) = {
+      navigationDAO.find("no-SignIn").map{
+        case Some(a) => Ok(Json.toJson(a.entrys))
+        case _ => BadRequest("Navigation not found")
+      }
+    }
+    override def onNotAuthorized(implicit request: RequestHeader) = {
+      Future.successful(BadRequest("No Navigation access"))
+}
+  }
+
+  def getGlobalNavigationAsJson = silhouette.SecuredAction(defaultHandler).async { implicit request =>
+    navigationDAO.find("GlobalNav").map{
+      case Some(a) => Ok(Json.toJson(a.entrys))
+      case _ => BadRequest("Navigation not found")
+    }
+  }
+
 
   def getNavigation(name: String) = Action.async { request =>
     navigationDAO.find(name).map{
