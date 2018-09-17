@@ -15,7 +15,7 @@ import play.api.cache.CacheApi
 import play.api.Logger
 
 
-class UserController @Inject()(
+class DropsController @Inject()(
                                 override val conf : Configuration,
                                 cc: ControllerComponents,
                                 override val silhouette: Silhouette[CookieEnv],
@@ -24,5 +24,5 @@ class UserController @Inject()(
                                 override val socialProviderRegistry: SocialProviderRegistry,
                                 cache: CacheApi
                               ) extends AbstractController(cc) with DropsLoginController {
-    override val defaultRedirectUrl = "/drops"
+    override val defaultRedirectUrl = routes.NavigationController.userTest.url
 }

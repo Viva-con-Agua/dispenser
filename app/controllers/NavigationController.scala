@@ -15,6 +15,8 @@ import com.mohiva.play.silhouette.api.Silhouette
 import org.vivaconagua.play2OauthClient.silhouette.CookieEnv
 import org.vivaconagua.play2OauthClient.silhouette.UserService
 
+
+import play.api.mvc.AnyContent
 import com.mohiva.play.silhouette.api.actions.SecuredErrorHandler
 
 import models.JsonFormatsNavigation._
@@ -31,6 +33,7 @@ class NavigationController @Inject() (
   config: Configuration,
   render: RenderService,
   silhouette: Silhouette[CookieEnv],
+  userService: UserService,
   val env: Environment
 )extends AbstractController(cc) {
 
@@ -39,7 +42,9 @@ class NavigationController @Inject() (
   //def index = Action.async { implicit request =>
   //  Future.successful(Ok(views.html.navigation.index()))
   //}
-  
+
+  val logger: Logger = Logger(this.getClass())
+
   def init = Action.async { implicit request =>
     getNavigationFromFile("noSignIn") match {
       case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
@@ -90,7 +95,10 @@ class NavigationController @Inject() (
       case None => BadRequest("Navigation " + name + " not found")
     }
   }
-
+  def userTest = silhouette.SecuredAction.async { implicit request => {
+    Future.successful(Ok("User: " + request.identity))
+  }}
+  
   private def getNavigationFromFile(name: String): JsResult[Navigation] = {
     Logger.debug(Play.application.path.toString)
     val source: String = Source.fromFile(env.getFile("/conf/navigation/jsons/" + name + ".json")).getLines.mkString
