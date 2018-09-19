@@ -87,7 +87,21 @@ class NavigationController @Inject() (
       case _ => BadRequest("Navigation not found")
     }
   }
-
+  /**
+   */
+  def globalNavigationAsJson(id: String) = Action.async { request => 
+    if (id == "default") {
+      navigationDAO.find("no-SignIn").map{
+        case Some(navigation) => Ok(Json.toJson(navigation.entrys))
+        case _ => BadRequest("Navigation not found")
+      }
+    }else{
+      navigationDAO.find("GlobalNav").map{
+        case Some(navigation) => Ok(Json.toJson(navigation.entrys))
+        case _ => BadRequest("Navigation not found")
+      }
+    }
+  }
 
   def getNavigation(name: String) = Action.async { request =>
     navigationDAO.find(name).map{
