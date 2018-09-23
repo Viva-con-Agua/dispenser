@@ -7,7 +7,10 @@ INSTALL
 
 Dispenser can be build via sbt-buildtool.
 
+Provided Widgets
+================
 
+dispenser_navigation_widget 
 
 TEMPLATE
 ========
