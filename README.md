@@ -7,8 +7,6 @@ INSTALL
 
 Dispenser can be build via sbt-buildtool.
 
-
-
 TEMPLATE
 ========
 
@@ -50,7 +48,11 @@ simpleTemplate: header, body:
 ChangeLog
 =========
 
-## Version 0.3.8 (2018-07-10)
+## Version 0.3.12 (2018-09-23)
+* [[I] #44 - Extract footer as widget](https://github.com/Viva-con-Agua/dispenser/issues/44)
+* [[B] #41 - Logo links to wrong page](https://github.com/Viva-con-Agua/dispenser/issues/41)
+* [[B] #40 - Drop image is missing](https://github.com/Viva-con-Agua/dispenser/issues/40)
+* [[B] #39 - Vica con Agua](https://github.com/Viva-con-Agua/dispenser/issues/39)
 * [[F] #35 - Widget for handling navigation via Javascript](https://github.com/Viva-con-Agua/dispenser/issues/35)
 * [[B] #25 - Navigation not Found](https://github.com/Viva-con-Agua/dispenser/issues/25)
 * [[F] #31 - Templates: add option for handling javascript](https://github.com/Viva-con-Agua/dispenser/issues/31)
