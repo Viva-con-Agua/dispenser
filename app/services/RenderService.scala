@@ -18,21 +18,47 @@ class RenderService @Inject() (
     host + context
   }
   val indexURL = config.get[String]("dispenser.indexURL")
+  val imprintURL = config.get[String]("dispenser.imprintURL")
 
-  def buildSimpleHtml (navigation: Navigation, templateData: TemplateData, active: String): String = {
-    val navbarContent:String = build_navigation(navigation, active)
-
-    scalate.render("mustache/simple/main.mustache", Map(
+  def buildSimpleHtml (navigation: Option[Navigation], templateData: TemplateData, active: String): String = {
+    val navbarContent:String = navigation match {
+      case Some(nav) => build_navigation(nav, active)
+      case None => "ERROR: navigation not found"
+    }
+    val head = templateData.head match {
+      case Some(head) =>
+        new String(java.util.Base64.getDecoder.decode(head), "UTF-8")
+      case None =>
+        ""
+    }
+    scalate.render("mustache/main/main_simple.mustache", Map(
       "title" -> templateData.title,
       "hostURL" -> hostURL,
       "navbarContent" -> navbarContent,
+      "head" -> head,
+      "imprintURL" -> imprintURL,
       "content" -> new String(java.util.Base64.getDecoder.decode(templateData.content), "UTF-8")
     )).toString
   }
   
+  def buildWithNavigationWidget(templateData:TemplateData): String = {
+    val head = templateData.head match {
+      case Some(head) =>
+        new String(java.util.Base64.getDecoder.decode(head), "UTF-8")
+      case None =>
+        ""
+    }
+    scalate.render("mustache/main/main_navigation_widget.mustache", Map(
+      "title" -> templateData.title,
+      "head" -> head,
+      "content" -> new String(java.util.Base64.getDecoder.decode(templateData.content), "UTF-8"),
+      "footer" -> scalate.render("mustache/footer/footer.mustache", Map("imprintURL" -> imprintURL)).toString
+      )).toString   
+  }
+
   def buildErrorHtml(templateData: TemplateData): String = {
-    val navbarContent: String = scalate.render("mustache/navigate/navigate_error.mustache").toString
-    scalate.render("mustache/simple/main.mustache", Map(
+    val navbarContent: String = scalate.render("mustache/navigation/navigate_error.mustache").toString
+    scalate.render("mustache/main/main_simple.mustache", Map(
       "title" -> templateData.title,
       "hostURL" -> hostURL,
       "navbarContent" -> navbarContent,
@@ -49,13 +75,13 @@ class RenderService @Inject() (
         navigation = navigation + build_navigation_entry(entry) + "\n"
       }
     }
-    scalate.render("mustache/navigate/navigate_content.mustache", Map(
+    scalate.render("mustache/navigation/navigate_content.mustache", Map(
       "navbarEntrys" -> navigation)).toString
   }
   
   def build_navigation_entry_active (entry : NavigationEntry) : String = {
     val entryUrl = host + entry.url
-    scalate.render("mustache/navigate/navigate_entry_active.mustache", Map(
+    scalate.render("mustache/navigation/navigate_entry_active.mustache", Map(
       "entryLable" -> entry.lable, 
       "entryURL" -> entryUrl
     )).toString
@@ -64,7 +90,7 @@ class RenderService @Inject() (
   
   def build_navigation_entry (entry : NavigationEntry) : String = {
     val entryUrl = host + entry.url
-    scalate.render("mustache/navigate/navigate_entry.mustache", Map(
+    scalate.render("mustache/navigation/navigate_entry.mustache", Map(
       "entryLable" -> entry.lable, 
       "entryURL" -> entryUrl
     )).toString

@@ -10,6 +10,7 @@ case class Permission(
 case class NavigationEntry(
   lable: String,
   url: String,
+  entrys: Option[List[NavigationEntry]],
   permission: Option[Permission]
   )
 case class Navigation (
