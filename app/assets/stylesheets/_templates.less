@@ -1,14 +1,25 @@
 // BUTTONS
 
-.vca-button-primary() {
+.vca-button-primary(@vca-button-shadow) {
   @vca-button-primary: @primary-color;
   @vca-button-primary-font: @primary-font-color;
   @vca-button-highlight: @highlight-color;
   @vca-button-highlight-font: @default-color;
   @vca-button-disabled-font: @inactive-color;
-  @vca-button-shadow: @shadow;
 
   .vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow);
+}
+
+.vca-button-primary-default() {
+  .vca-button-primary(@shadow);
+}
+
+.vca-button-primary {
+  .vca-button-primary-default();
+}
+
+.vca-button-primary-no-shadow {
+  .vca-button-primary(none);
 }
 
 .vca-button-default() {
@@ -20,6 +31,10 @@
   @vca-button-shadow: @shadow;
 
   .vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow);
+}
+
+.vca-button-default {
+  .vca-button-default();
 }
 
 .vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow) {
@@ -105,18 +120,18 @@
       z-index: auto;
     }
 
-    .nav-sub {
-      padding: 4px 16px;
-      margin: 0;
-      .border-radius(0px);
-      &:hover, &.active {
-        background-color: lighten(@vca-button-highlight, 20%);
-        a {
-          text-decoration: none;
-          background-color: transparent;
-        }
-      }
-    }
+    //.nav-sub {
+    //  padding: 4px 16px;
+    //  margin: 0;
+    //  .border-radius(0px);
+    //  &:hover, &.active {
+    //    background-color: lighten(@vca-button-highlight, 20%);
+    //    a {
+    //      text-decoration: none;
+    //      background-color: transparent;
+    //    }
+    //  }
+    //}
   }
   &.dropdown:hover .dropdown-content {
     display: block;

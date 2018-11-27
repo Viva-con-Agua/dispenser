@@ -6,21 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>VcA | Pool</title>
 		<link rel="shortcut icon" type="image/png" href="/dispenser/images/drop.png">
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" media="screen" href="/dispenser/css/vca.css">
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 		<script src="/dispenser/javascript/dropzone.js"></script>
 		<script src="/dispenser/javascript/config.js"></script>
+		<style>
+		  #pool {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: #2c3e50;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: min-content;
+          }
+          #content {
+            flex-grow: 1;
+            display: flex;
+            overflow: auto;
+          }
+		</style>
       {{{head}}}
   </head>
   <body>
-    <div id=navigation-widget></div>
-    <script type=text/javascript src=/dispenser/javascript/navigation_widget.js></script>
-    <div class="container">
-            {{{content}}}
+    <div id="pool">
+        <div id="navigation-widget"></div>
+        <script type="text/javascript" src="/dispenser/javascript/navigation_widget.js"></script>
+        <div id="content">
+          {{{content}}}
+        </div>
+        <div id="footer-widget"></div>
+        <script type="text/javascript" src="/dispenser/javascript/footer_widget.js"></script>
     </div>
   </body>
-  <footer>
-     <div id=footer-widget></div>
-     <script type=text/javascript src=/dispenser/javascript/footer_widget.js></script>
-  </footer>
+</html>

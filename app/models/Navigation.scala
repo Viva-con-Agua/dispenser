@@ -3,15 +3,16 @@ import reactivemongo.play.json._
 
 
 case class Permission(
-  role: Option[List[String]],
-  task: Option[List[String]]
+  role: String,
+  crewNames: Option[List[String]],
+  pillars: Option[List[String]]
   )
 
 case class NavigationEntry(
   lable: String,
   url: String,
   entrys: Option[List[NavigationEntry]],
-  permission: Option[Permission]
+  permission: Option[List[Permission]]
   )
 case class Navigation (
   name: String,
