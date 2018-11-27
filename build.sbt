@@ -8,10 +8,14 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(Sb
 
 scalaVersion := "2.12.6"
 
+//resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+//resolvers += "Sonatype OSS Staging" at "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+resolvers += "Sonatype OSS Releases" at "https://oss.sonatype.org/content/repositories/releases/"
 
 libraryDependencies += guice
 libraryDependencies += ehcache
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
+libraryDependencies += "org.vivaconagua" %% "play2-oauth-client" % "0.4.3"
 //libraryDependencies += "commons-codec" % "commons-codec" % "1.10"
 libraryDependencies ++= Seq(
 // "org.reactivemongo" %% "play2-reactivemongo" % "0.16.0", 
@@ -29,10 +33,6 @@ unmanagedResourceDirectories in Compile += baseDirectory.value / "public"
 
 includeFilter in (Assets, LessKeys.less) := "*.less"
 excludeFilter in (Assets, LessKeys.less) := "_*.less"
-
-resolvers += "Sonatype OSS Releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-
-libraryDependencies += "org.vivaconagua" %% "play2-oauth-client" % "0.4.1"
 
 //Docker
 maintainer in Docker := "Dennis Kleber"
