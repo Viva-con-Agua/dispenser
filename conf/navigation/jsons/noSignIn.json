@@ -1,0 +1,19 @@
+{
+	"name":"no-SignIn",
+	"involved":[
+					"/arise/#/signin",
+					"/arise/#/signup"
+	],
+	"entrys": [
+		{
+			"lable":"signIn",
+			"render":true,
+			"url":"/arise/#/signin"
+		},
+		{
+			"lable":"signUp",
+			"render":true,
+			"url":"/arise/#/signup"
+		}
+	]
+}
