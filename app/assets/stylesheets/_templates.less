@@ -5,9 +5,10 @@
   @vca-button-primary-font: @primary-font-color;
   @vca-button-highlight: @highlight-color;
   @vca-button-highlight-font: @primary-font-color;
+  @vca-button-disabled: @disabled-color;
   @vca-button-disabled-font: @inactive-color;
 
-  .vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow);
+  .vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-disabled, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow);
 }
 
 .vca-button-primary-default() {
@@ -26,18 +27,19 @@
   @vca-button-primary: @background-color;
   @vca-button-primary-font: @default-color;
   @vca-button-highlight: @background-color-dark;
+  @vca-button-disabled: @disabled-color;
   @vca-button-highlight-font: @default-color;
   @vca-button-disabled-font: @inactive-color;
   @vca-button-shadow: @shadow;
 
-  .vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow);
+  .vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-disabled, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow);
 }
 
 .vca-button-default {
   .vca-button-default();
 }
 
-.vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow) {
+.vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-disabled, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow) {
   background-color: @vca-button-primary;
   color: @vca-button-primary-font;
   padding: 0.5em 0;
@@ -81,10 +83,12 @@
   }
 
 
-  &.disabled {
+  &.disabled, &.disabled:hover, &:disabled, &:disabled:hover {
     color: @vca-button-disabled-font;
+    background-color: @vca-button-disabled;
     a {
       color: @vca-button-disabled-font;
+      background-color: @vca-button-primary;
     }
   }
   &.profile a {
