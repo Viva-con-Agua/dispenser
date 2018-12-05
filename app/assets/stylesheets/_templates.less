@@ -1,5 +1,13 @@
 // BUTTONS
 
+.vca-full-width {
+  width: 100%;
+  margin-top:1em;
+  margin-bottom:1em;
+  display: block;
+  text-align: center;
+}
+
 .vca-button-primary(@vca-button-shadow) {
   @vca-button-primary: @primary-color;
   @vca-button-primary-font: @primary-font-color;
@@ -21,6 +29,22 @@
 
 .vca-button-primary-no-shadow {
   .vca-button-primary(none);
+}
+
+.vca-button-warn() {
+  @vca-button-primary: @warn-color;
+  @vca-button-primary-font: @primary-font-color;
+  @vca-button-highlight: @warn-highlight-color;
+  @vca-button-disabled: @disabled-color;
+  @vca-button-highlight-font: @primary-font-color;
+  @vca-button-disabled-font: @inactive-color;
+  @vca-button-shadow: @shadow;
+
+  .vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-disabled, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow);
+}
+
+.vca-button-warn {
+  .vca-button-warn();
 }
 
 .vca-button-default() {
@@ -46,6 +70,7 @@
   border: 0;
   text-transform: uppercase;
   font-weight: bold;
+  text-decoration: none;
   .border-radius-shadowed(@radius, @vca-button-shadow);
 
   @media (max-width: @responsiveBreak) {
@@ -80,6 +105,7 @@
 
   &.active, &:not(.disabled):hover, &.btn:not(.disabled):hover {
     .vca-button-primary-highlight;
+    text-decoration: none;
   }
 
 
