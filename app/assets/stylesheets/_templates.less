@@ -54,9 +54,14 @@
   @vca-button-disabled: @disabled-color;
   @vca-button-highlight-font: @default-color;
   @vca-button-disabled-font: @inactive-color;
-  @vca-button-shadow: @shadow;
+  @vca-button-shadow: none;
 
   .vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-disabled, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow);
+  padding: 0.3em 0.2em;
+  border: 1px solid @inactive-color;
+  &:hover {
+    .box-shadow(@shadowLess);
+  }
 }
 
 .vca-button-default {
