@@ -68,6 +68,23 @@
   .vca-button-default();
 }
 
+.vca-button-inline {
+  background-color: transparent;
+  border: 0;
+  .box-shadow(none);
+  color: @primary-color;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  &:hover {
+    color: @accent-color
+  }
+  &:active, &:focus {
+    outline: 0;
+  }
+}
+
 .vca-button(@vca-button-primary, @vca-button-primary-font, @vca-button-highlight, @vca-button-disabled, @vca-button-highlight-font, @vca-button-disabled-font, @vca-button-shadow) {
   background-color: @vca-button-primary;
   color: @vca-button-primary-font;
