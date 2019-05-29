@@ -48,7 +48,7 @@ simpleTemplate: header, body:
 ChangeLog
 =========
 
-## Version 0.4.13 (2018-11-27)
+## Version 0.4.14 (2018-11-27)
 * [[F] #48 - Use RbAC](https://github.com/Viva-con-Agua/dispenser/issues/48)
 * [[B] #42 - Footer should be fixed](https://github.com/Viva-con-Agua/dispenser/issues/42)
 * [[I] #44 - Extract footer as widget](https://github.com/Viva-con-Agua/dispenser/issues/44)
