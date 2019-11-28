@@ -46,11 +46,19 @@ class NavigationController @Inject() (
   val logger: Logger = Logger(this.getClass())
 
   def init = Action.async { implicit request =>
-    getNavigationFromFile("noSignIn") match {
+    getNavigationFromFile("noSignInDE") match {
       case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
       case e: JsError => BadRequest(JsError.toJson(e).toString)
     }
-    getNavigationFromFile("drops") match {
+    getNavigationFromFile("noSignInEN") match {
+      case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
+      case e: JsError => BadRequest(JsError.toJson(e).toString)
+    }
+    getNavigationFromFile("GlobalNavDE") match {
+      case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
+      case e: JsError => BadRequest(JsError.toJson(e).toString)
+    } 
+    getNavigationFromFile("GlobalNavEN") match {
       case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
       case e: JsError => BadRequest(JsError.toJson(e).toString)
     } 
@@ -58,7 +66,7 @@ class NavigationController @Inject() (
   }
 
   def insertNavigation = Action.async(validateJson[Navigation]) { request =>
-    navigationDAO.insert(request.body)
+    navigationDAO.update(request.body)
     Future.successful(Ok)
   }
   
@@ -71,25 +79,54 @@ class NavigationController @Inject() (
   
   val defaultHandler = new SecuredErrorHandler {
     override def onNotAuthenticated(implicit request: RequestHeader) = {
-      navigationDAO.find("no-SignIn").map{
-        case Some(a) => Ok(Json.toJson(a.entrys))
-        case _ => BadRequest("Navigation not found")
+      navigationDAO.find("no-SignInDE").map{
+          case Some(a) => Ok(Json.toJson(a.entrys))
+          case _ => BadRequest("Navigation not found")
       }
     }
     override def onNotAuthorized(implicit request: RequestHeader) = {
       Future.successful(BadRequest("No Navigation access"))
-}
+    }
   }
-
-  def getGlobalNavigationAsJson = silhouette.SecuredAction(defaultHandler).async { implicit request =>
-    navigationDAO.find("GlobalNav").map{
-      case Some(a) => Ok(Json.toJson(a.entrys))
-      case _ => BadRequest("Navigation not found")
+  
+  def navigationNoSignIn(locale: String) = {
+      if(locale ==  "de" ) { 
+        navigationDAO.find("no-SignInDE").map{
+          case Some(a) => Ok(Json.toJson(a.entrys))
+          case _ => BadRequest("Navigation not found")
+        }
+      } else {
+        navigationDAO.find("no-SignInEN").map{
+          case Some(a) => Ok(Json.toJson(a.entrys))
+          case _ => BadRequest("Navigation not found")
+        }
+      }
+ 
+  }
+  def navigationGlobal(locale: String) = {
+      if ( locale == "de") { 
+        navigationDAO.find("GlobalNavDE").map{
+          case Some(a) => Ok(Json.toJson(a.entrys))
+          case _ => BadRequest("Navigation not found")
+        }
+      } else {
+        navigationDAO.find("GlobalNavEN").map{
+          case Some(a) => Ok(Json.toJson(a.entrys))
+          case _ => BadRequest("Navigation not found")
+        }
+      }
+  }
+  def getGlobalNavigationAsJson(name: String, locale: String) = Action.async { implicit request =>
+    Logger.debug(name)
+    if( name == "default") {
+      navigationNoSignIn(locale)
+    } else {
+      navigationGlobal(locale)
     }
   }
   /**
    */
-  def globalNavigationAsJson(id: String) = Action.async { request => 
+  def globalNavigationAsJson(id: String, locale: String) = Action.async { request => 
     if (id == "default") {
       navigationDAO.find("no-SignIn").map{
         case Some(navigation) => Ok(Json.toJson(navigation.entrys))
