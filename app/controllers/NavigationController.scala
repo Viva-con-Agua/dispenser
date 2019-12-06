@@ -152,7 +152,7 @@ class NavigationController @Inject() (
   
   private def getNavigationFromFile(name: String): JsResult[Navigation] = {
     Logger.debug(Play.application.path.toString)
-    val source: String = Source.fromFile(env.getFile("/conf/navigation/jsons/" + name + ".json")).getLines.mkString
+    val source: String = Source.fromFile(env.getFile("/conf/navigation/jsons/" + name + ".json"))("UTF-8").getLines.mkString
     Json.parse(source).validate[Navigation]
   }
 }
