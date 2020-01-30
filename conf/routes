@@ -19,6 +19,7 @@ GET   /navigation/init              controllers.NavigationController.init
 POST /navigation/insert    					controllers.NavigationController.insertNavigation
 #GET /navigation/get/:name					  controllers.NavigationController.getNavigationAsJson(name: String)
 
+GET /navigation/:name               controllers.NavigationController.getNavigation(name: String)
 GET /navigation/get/:name/:locale				      controllers.NavigationController.getGlobalNavigationAsJson(name: String, locale: String)
 # GET /navigation/default             controllers.NavigationController.getGlobalNavigationAsJson
 # Map static resources from the /public folder to the /assets URL path

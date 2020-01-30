@@ -46,22 +46,22 @@ class NavigationController @Inject() (
   val logger: Logger = Logger(this.getClass())
 
   def init = Action.async { implicit request =>
-    getNavigationFromFile("noSignInDE") match {
+   // getNavigationFromFile("noSignInDE") match {
+   //   case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
+   //   case e: JsError => BadRequest(JsError.toJson(e).toString)
+   // }
+    getNavigationFromFile("noSignIn") match {
       case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
       case e: JsError => BadRequest(JsError.toJson(e).toString)
     }
-    getNavigationFromFile("noSignInEN") match {
-      case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
-      case e: JsError => BadRequest(JsError.toJson(e).toString)
-    }
-    getNavigationFromFile("GlobalNavDE") match {
+    getNavigationFromFile("GlobalNav") match {
       case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
       case e: JsError => BadRequest(JsError.toJson(e).toString)
     } 
-    getNavigationFromFile("GlobalNavEN") match {
-      case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
-      case e: JsError => BadRequest(JsError.toJson(e).toString)
-    } 
+   // getNavigationFromFile("GlobalNavEN") match {
+   //   case s: JsSuccess[Navigation] => navigationDAO.update(s.get)
+   //   case e: JsError => BadRequest(JsError.toJson(e).toString)
+   // } 
     Future.successful(Ok)
   }
 
@@ -124,6 +124,7 @@ class NavigationController @Inject() (
       navigationGlobal(locale)
     }
   }
+
   /**
    */
   def globalNavigationAsJson(id: String, locale: String) = Action.async { request => 
@@ -142,14 +143,14 @@ class NavigationController @Inject() (
 
   def getNavigation(name: String) = Action.async { request =>
     navigationDAO.find(name).map{
-      case Some(a) => Ok(render.build_navigation(a, ""))
+      case Some(navigation) => Ok(Json.toJson(navigation.entrys))
       case None => BadRequest("Navigation " + name + " not found")
     }
   }
   def userTest = silhouette.SecuredAction.async { implicit request => {
     Future.successful(Ok("User: " + request.identity))
   }}
-  
+
   private def getNavigationFromFile(name: String): JsResult[Navigation] = {
     Logger.debug(Play.application.path.toString)
     val source: String = Source.fromFile(env.getFile("/conf/navigation/jsons/" + name + ".json"))("UTF-8").getLines.mkString

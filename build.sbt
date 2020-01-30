@@ -39,7 +39,7 @@ maintainer in Docker := "Dennis Kleber"
 dockerExposedPorts := Seq(9000, 9443)
 dockerRepository := Some("vivaconagua")
 routesGenerator := InjectedRoutesGenerator
-version in Docker := "latest"
+version in Docker := "develop"
 
 
 // Adds additional packages into Twirl
