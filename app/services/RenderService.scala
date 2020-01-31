@@ -82,7 +82,7 @@ class RenderService @Inject() (
   def build_navigation_entry_active (entry : NavigationEntry) : String = {
     val entryUrl = host + entry.url
     scalate.render("mustache/navigation/navigate_entry_active.mustache", Map(
-      "entryLable" -> entry.lable, 
+      "entryLable" -> entry.label.de_DE, 
       "entryURL" -> entryUrl
     )).toString
   }
@@ -91,7 +91,7 @@ class RenderService @Inject() (
   def build_navigation_entry (entry : NavigationEntry) : String = {
     val entryUrl = host + entry.url
     scalate.render("mustache/navigation/navigate_entry.mustache", Map(
-      "entryLable" -> entry.lable, 
+      "entryLable" -> entry.label.de_DE, 
       "entryURL" -> entryUrl
     )).toString
   }

@@ -1,7 +1,7 @@
 name := """dispenser"""
 organization := "com.example"
 
-version := Option(System.getProperty("version")).getOrElse("0.4.14")
+version := Option(System.getProperty("version")).getOrElse("0.4.15")
 //version := "0.2.3"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(SbtWeb)
@@ -39,7 +39,7 @@ maintainer in Docker := "Dennis Kleber"
 dockerExposedPorts := Seq(9000, 9443)
 dockerRepository := Some("vivaconagua")
 routesGenerator := InjectedRoutesGenerator
-
+version in Docker := "develop"
 
 
 // Adds additional packages into Twirl
