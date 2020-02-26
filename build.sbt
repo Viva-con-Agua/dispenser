@@ -15,7 +15,6 @@ resolvers += "Sonatype OSS Releases" at "https://oss.sonatype.org/content/reposi
 libraryDependencies += guice
 libraryDependencies += ehcache
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
-libraryDependencies += "org.vivaconagua" %% "play2-oauth-client" % "0.4.3"
 //libraryDependencies += "commons-codec" % "commons-codec" % "1.10"
 libraryDependencies ++= Seq(
 // "org.reactivemongo" %% "play2-reactivemongo" % "0.16.0", 

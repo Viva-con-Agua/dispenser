@@ -30,7 +30,7 @@ GET  	/javascript/*file 				    controllers.Assets.at(path="/public/javascripts"
 GET   /images/*file 						    controllers.Assets.at(path="/public/images", file)
 GET   /css/*file                    controllers.Assets.at(path="/public/stylesheets", file)
 
-GET   /user                         controllers.NavigationController.userTest
-GET        /identity                controllers.DropsController.frontendLogin
-GET  /authenticate/:provider controllers.DropsController.authenticate(provider, route: Option[String], ajax: Option[Boolean])
-POST /authenticate/:provider controllers.DropsController.authenticate(provider, route: Option[String], ajax: Option[Boolean])
+#GET   /user                         controllers.NavigationController.userTest
+#GET        /identity                controllers.DropsController.frontendLogin
+#GET  /authenticate/:provider controllers.DropsController.authenticate(provider, route: Option[String], ajax: Option[Boolean])
+#POST /authenticate/:provider controllers.DropsController.authenticate(provider, route: Option[String], ajax: Option[Boolean])

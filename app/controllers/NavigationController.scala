@@ -11,13 +11,13 @@ import com.github.tototoshi.play2.scalate._
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
-import com.mohiva.play.silhouette.api.Silhouette
-import org.vivaconagua.play2OauthClient.silhouette.CookieEnv
-import org.vivaconagua.play2OauthClient.silhouette.UserService
+//import com.mohiva.play.silhouette.api.Silhouette
+//import org.vivaconagua.play2OauthClient.silhouette.CookieEnv
+//import org.vivaconagua.play2OauthClient.silhouette.UserService
 
 
 import play.api.mvc.AnyContent
-import com.mohiva.play.silhouette.api.actions.SecuredErrorHandler
+//import com.mohiva.play.silhouette.api.actions.SecuredErrorHandler
 
 import models.JsonFormatsNavigation._
 import daos._
@@ -32,8 +32,8 @@ class NavigationController @Inject() (
   navigationDAO: NavigationDAO,
   config: Configuration,
   render: RenderService,
-  silhouette: Silhouette[CookieEnv],
-  userService: UserService,
+  //silhouette: Silhouette[CookieEnv],
+  //userService: UserService,
   val env: Environment
 )extends AbstractController(cc) {
 
@@ -77,7 +77,7 @@ class NavigationController @Inject() (
     }
   }
   
-  val defaultHandler = new SecuredErrorHandler {
+  /*val defaultHandler = new SecuredErrorHandler {
     override def onNotAuthenticated(implicit request: RequestHeader) = {
       navigationDAO.find("no-SignInDE").map{
           case Some(a) => Ok(Json.toJson(a.entrys))
@@ -87,7 +87,7 @@ class NavigationController @Inject() (
     override def onNotAuthorized(implicit request: RequestHeader) = {
       Future.successful(BadRequest("No Navigation access"))
     }
-  }
+  }*/
   
   def navigationNoSignIn(locale: String) = {
       if(locale ==  "de" ) { 
@@ -147,9 +147,6 @@ class NavigationController @Inject() (
       case None => BadRequest("Navigation " + name + " not found")
     }
   }
-  def userTest = silhouette.SecuredAction.async { implicit request => {
-    Future.successful(Ok("User: " + request.identity))
-  }}
 
   private def getNavigationFromFile(name: String): JsResult[Navigation] = {
     Logger.debug(Play.application.path.toString)
